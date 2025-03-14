@@ -39,7 +39,7 @@ public class App {
             }
         });
 
-        // Rendre la fenêtre visibless
+        // Rendre la fenêtre visibles
         cadre.setVisible(true);
 
         var fenetre = cadre.getContentPane();
