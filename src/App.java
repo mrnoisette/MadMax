@@ -1,4 +1,8 @@
 import javax.swing.*;
+
+import ObjetMemoire.Humain;
+import ObjetMemoire.Roquette;
+
 import java.awt.event.*;
 import java.awt.Toolkit;
 import java.awt.Color;
@@ -8,7 +12,7 @@ public class App {
     public static void main(String[] args) {
 
         // Créer un JFrame (fenêtre)
-        JFrame cadre = new JFrame("Java Game");
+        JFrame cadre = new JFrame("Mad Max");
 
         // Récupérer la taille de l'écran
         Toolkit toolkit = Toolkit.getDefaultToolkit();
