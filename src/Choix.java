@@ -1,21 +1,21 @@
 public class Choix {
 
-    private int _numero;
-    private String _description;
+    private String _libelle;
+    private Noeud _prochainNoeud;
 
-    public int getNumero() {
-        return _numero;
+    public String getLibelle() {
+        return _libelle;
     }
 
-    public void setNumero(int numero) {
-        this._numero = Math.max(0, numero);
+    public void setLibelle(String description) {
+        this._libelle = description;
     }
 
-    public String getDescription() {
-        return _description;
+    public Noeud getProchainNoeud() {
+        return _prochainNoeud;
     }
 
-    public void setDescription(String description) {
-        this._description = description;
+    public void setProchainNoeud(Noeud noeud) {
+        this._prochainNoeud = noeud;
     }
 }

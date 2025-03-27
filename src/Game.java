@@ -7,9 +7,11 @@ public class Game {
 
     public JFrame Fenetre;
     public JLabel ImageLabel;
+    public ImageIcon ImageAffichage;
     public JTextArea ZoneTexte;
     public JPanel ZoneBoutons;
     public JTextArea ZoneInfos;
+    public JPanel centerPanel ;
 
     // Constructeur
     public Game() {
@@ -31,13 +33,13 @@ public class Game {
         Fenetre.add(ZoneBoutons, BorderLayout.SOUTH);
 
         // Panel central pour l'image et le texte
-        JPanel centerPanel = new JPanel(new BorderLayout());
+        centerPanel = new JPanel(new BorderLayout());
         centerPanel.setBackground(Color.black);
 
         // Image
         ImageLabel = new JLabel();
-        var img = new ImageIcon("./assets/images/introduction.jpeg");
-        Image scaledImage = img.getImage().getScaledInstance(1000, 600, Image.SCALE_SMOOTH);
+        ImageAffichage = new ImageIcon("./assets/images/introduction.jpeg");
+        Image scaledImage = ImageAffichage.getImage().getScaledInstance(1000, 600, Image.SCALE_SMOOTH);
         ImageLabel.setIcon(new ImageIcon(scaledImage));
         ImageLabel.setHorizontalAlignment(JLabel.CENTER);
         ImageLabel.setBackground(Color.black);
@@ -48,7 +50,7 @@ public class Game {
         ZoneTexte.setEditable(false);
         ZoneTexte.setBackground(Color.black);
         ZoneTexte.setForeground(Color.white);
-        ZoneTexte.setFont(new Font("Arial", Font.PLAIN, 16));
+        ZoneTexte.setFont(new Font("Arial", Font.PLAIN, 18));
         ZoneTexte.setLineWrap(true);
         ZoneTexte.setWrapStyleWord(true);
         ZoneTexte.setMargin(new Insets(10, 10, 100, 10));
@@ -71,11 +73,9 @@ public class Game {
 
         // Affichage de l'illustration
         if (noeud.Illustration != null) {
-            ImageIcon icon = noeud.Illustration;
-            Image scaledImage = icon.getImage().getScaledInstance(1000, 600, Image.SCALE_SMOOTH);
-            ImageLabel.setIcon(new ImageIcon(scaledImage));
+            ImageLabel.setIcon(noeud.Illustration);
         } else {
-            ImageLabel.setIcon(null); // Si pas d'image
+            ImageLabel.setIcon(null);
         }
 
         // Lecture de l'audio
@@ -88,19 +88,14 @@ public class Game {
         if (noeud.ListeChoix != null && noeud.ListeChoix.size() > 0) {
             for (var choix : noeud.ListeChoix) {
                 var bouton = new JButton();
-                bouton.setText(choix.getNumero() + " - " + choix.getDescription());
+                bouton.setText(choix.getLibelle());
                 bouton.addActionListener(e -> {
-                    AfficherNoeud(Story.PanneAutoroute());
+                    AfficherNoeud(choix.getProchainNoeud());
                 });
                 ZoneBoutons.add(bouton);
             }
         } else { // Pas de choix
-            var bouton = new JButton();
-            bouton.setText("Continuer");
-            bouton.addActionListener(e -> {
-                AfficherNoeud(Story.PanneAutoroute());
-            });
-            ZoneBoutons.add(bouton);
+            // TODO
         }
 
         // Actualiser

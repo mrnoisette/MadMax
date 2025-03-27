@@ -1,11 +1,11 @@
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 
 public class Story {
 
-     public static Noeud Introduction() {
+    public static Noeud Introduction() {
         var noeud = new Noeud();
 
         noeud.Description = "A la suite d'innombrables années d'ignorance, et malgré les alertes que notre planètes nous a envoyé, celle-ci ne pouvait plus encaisser le poids de nos actes.."
@@ -13,8 +13,15 @@ public class Story {
                 + "La sécheresse, issues de l'épuisement de l'ensemble des ressources planétaires, emmena l'humanité dans ses tréfonds, et l'avènement d'une époque sinitre faisait surface."
                 + "\n\n"
                 + "Désormais, le pétrol, et l'eau, étaient les seules denrées qui avaient de la valeur dans ce monde...";
-        noeud.Illustration = new ImageIcon("../assets/images/introduction.jpeg");
-        noeud.ListeChoix = null;
+
+        noeud.Illustration = new ImageIcon("./assets/images/introduction.jpeg");
+
+        noeud.ListeChoix = new ArrayList<Choix>();
+
+        var choix1 = new Choix();
+        choix1.setLibelle("Continuer");
+        choix1.setProchainNoeud(Commencement());
+        noeud.ListeChoix.add(choix1);
 
         return noeud;
     }
@@ -27,9 +34,17 @@ public class Story {
                 + "Pour cela, votre équipe vous a spécialement préparée une Dodge Interceptor afin de pouvoir braver cet impitoyable dessert et ses danger."
                 + "\n\n"
                 + "Vous embarquez donc dans votre véhicule, et partez à l'aventure.";
-        noeud.Illustration = new ImageIcon("../assets/images/interceptor.jpeg");
+
+        noeud.Illustration = new ImageIcon("./assets/images/interceptor.jpeg");
+
         noeud.Sound = new File("./assets/sounds/motor.wav");
-        noeud.ListeChoix = null;
+
+        noeud.ListeChoix = new ArrayList<Choix>();
+
+        var choix1 = new Choix();
+        choix1.setLibelle("Continuer");
+        choix1.setProchainNoeud(PanneAutoroute());
+        noeud.ListeChoix.add(choix1);
 
         return noeud;
     }
@@ -50,25 +65,39 @@ public class Story {
         noeud.ListeChoix = new ArrayList<Choix>();
 
         var choix1 = new Choix();
-        choix1.setNumero(1);
-        choix1.setDescription("Faire du stop.");
+        choix1.setLibelle("Faire du stop.");
+        choix1.setProchainNoeud(FaireStop());
         noeud.ListeChoix.add(choix1);
 
         var choix2 = new Choix();
-        choix2.setNumero(2);
-        choix2.setDescription("Se cacher.");
+        choix2.setLibelle("Se cacher.");
+        choix2.setProchainNoeud(SeCacher());
         noeud.ListeChoix.add(choix2);
 
         return noeud;
     }
 
     public static Noeud SeCacher() {
-        return null;
+        var noeud = new Noeud();
+
+        noeud.Description = "Un panneau publicitaire se trouvant à votre gauche, vous vous y précipité rapidement pour vous y cacher."
+                + "\n\n"
+                + "Le véhicule approchant peu à peu, vous dicerner une bande de bandit. Vous avez bien fais de vous cacher. Qui sait ce qu'ils vous auraient fait !";
+
+        noeud.Illustration = null;
+
+        noeud.ListeChoix = new ArrayList<Choix>();
+
+        var choix1 = new Choix();
+        choix1.setLibelle("Continuer");
+        choix1.setProchainNoeud(null); // TODO
+        noeud.ListeChoix.add(choix1);
+
+        return noeud;
     }
 
     public static Noeud FaireStop() {
         return null;
     }
-
 
 }
