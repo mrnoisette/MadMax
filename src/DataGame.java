@@ -1,30 +1,51 @@
-public class DataGame {
+import java.util.ArrayList;
 
-    public DataGame() {
-        _acces = new AccesGame();
-    }
+// Singleton thread safe 
+public class DataGame {
+    private static DataGame _instance;
 
     private AccesGame _acces;
 
-    private Player _currentPlayer;
+    private DataGame() {
+        _acces = new AccesGame();
+        ListePlayer = _acces.LireListePlayer();
+    }
 
-    // Obtenir le joueur actuel
-    public Player GetCurrentPlayer() {
-        if (_currentPlayer == null) {
-            return _acces.LirePlayer();
-        } else {
-            return _currentPlayer;
+    // Synchronized pour eviter le partage de données obsolettes entre deux threads
+    public static synchronized DataGame getInstance() {
+        if (_instance == null) {
+            _instance = new DataGame();
+        }
+        return _instance;
+    }
+
+    public ArrayList<Player> ListePlayer;
+
+    public void AjouterPlayer(Player player) {
+        try {
+            if (ListePlayer.contains(player)) {
+                return;
+            }
+            _acces.InsererPlayer(player);
+            ListePlayer.add(player);
+        } catch (Exception e) {
+
         }
     }
 
-    // Modifier le joueur actuel
-    public void SetCurrentPlayer(Player player) {
-        _currentPlayer = player;
+    public void ModifierPlayer(Player player) {
+        // TODO
     }
 
-    // Affiche avec TAB les infos du joueur
-    public void AfficherInfo(){
+    public void SupprimerPlayer(Player player) {
+        try {
+            _acces.SupprimerPlaye(player);
+            ListePlayer.remove(player);
+        } catch (Exception e) {
 
+        }
     }
+
+    public Player CurrentPlayer;
 
 }
