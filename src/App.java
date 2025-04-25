@@ -15,7 +15,7 @@ public class App {
         fenetre.setVisible(true);
 
         AfficherMenuPrincipal(fenetre);
-    }
+    } // hello pd
 
     private static void AfficherMenuPrincipal(JFrame fenetre) {
         ClearFenetre(fenetre);
