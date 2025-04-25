@@ -8,7 +8,6 @@ public class AccesGame {
 
     // Format du fichier csv :
     // nom,idNoeud,sante,chance,nbmedikit,argent
-
     private String _cheminSave = "src/save.csv";
 
     public ArrayList<Player> LireListePlayer() {
@@ -60,7 +59,7 @@ public class AccesGame {
         // TODO
     }
 
-    public void SupprimerPlaye(Player player) {
+    public void SupprimerPlayer(Player player) {
         // TODO
     }
 

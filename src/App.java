@@ -14,14 +14,7 @@ public class App {
         fenetre.setLayout(new BorderLayout());
         fenetre.setVisible(true);
 
-        // Animation de lancement
-        // TODO
-
-        // Menu principal
         AfficherMenuPrincipal(fenetre);
-
-        // Lancement du jeu
-
     }
 
     private static void AfficherMenuPrincipal(JFrame fenetre) {

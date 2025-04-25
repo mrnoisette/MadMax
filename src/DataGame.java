@@ -39,7 +39,7 @@ public class DataGame {
 
     public void SupprimerPlayer(Player player) {
         try {
-            _acces.SupprimerPlaye(player);
+            _acces.SupprimerPlayer(player);
             ListePlayer.remove(player);
         } catch (Exception e) {
 
