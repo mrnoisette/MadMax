@@ -106,10 +106,8 @@ public class App {
                 // Vérifier la réponse de l'utilisateur
                 if (reponse == JOptionPane.YES_OPTION) {
                     DataGame.getInstance().SupprimerPlayer(player);
-
-                } else if (reponse == JOptionPane.NO_OPTION) {
                 }
-                ActualiserFenetre(fenetre);
+                AfficherMenuSelectionProfil(fenetre);
             });
 
             panelProfils.add(btnCroix);

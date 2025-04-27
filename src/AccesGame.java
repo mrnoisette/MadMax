@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class AccesGame {
@@ -60,7 +57,44 @@ public class AccesGame {
     }
 
     public void SupprimerPlayer(Player player) {
-        // TODO
+        ArrayList<String> listeLigne = new ArrayList<String>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(_cheminSave))) {
+
+            // Ignorer la première ligne (en-tête)
+            br.readLine();
+
+            String ligne;
+            while ((ligne = br.readLine()) != null) {
+                String[] colonnes = ligne.split(",");
+
+                // Comparer les noms de manière correcte avec equals()
+                if (colonnes[0].equals(player.Nom)) {
+                    continue; // Ne pas ajouter la ligne avec le joueur à supprimer
+                } else {
+                    listeLigne.add(ligne);
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println("Erreur SupprimerPlayer :" + e.getMessage());
+        }
+
+        // Réécrire les lignes sans la ligne supprimée
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(_cheminSave))) {
+            // Réécrire la première ligne (en-tête) si nécessaire
+            bw.write("nom,idNoeud,sante,chance,nbmedikit,argent");
+            bw.newLine();
+
+            // Réécrire les profils
+            for (String l : listeLigne) {
+                bw.write(l);
+                bw.newLine();
+            }
+
+        } catch (IOException e) {
+            System.out.println("Erreur SupprimerPlayer :" + e.getMessage());
+        }
     }
 
 }
