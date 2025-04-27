@@ -15,7 +15,7 @@ public class App {
         fenetre.setVisible(true);
 
         AfficherMenuPrincipal(fenetre);
-    } 
+    }
 
     private static void AfficherMenuPrincipal(JFrame fenetre) {
         ClearFenetre(fenetre);
@@ -33,13 +33,14 @@ public class App {
 
         // Espacement et ajout
         panel.add(Box.createVerticalGlue());
+
         panel.add(btnJouer);
         panel.add(Box.createRigidArea(new Dimension(0, 20))); // Espace entre les boutons
         panel.add(btnParam);
         panel.add(Box.createRigidArea(new Dimension(0, 40))); // Espace entre les boutons
         panel.add(btnQuitter);
-        panel.add(Box.createVerticalGlue());
 
+        panel.add(Box.createVerticalGlue());
         fenetre.add(panel, BorderLayout.CENTER);
 
         ActualiserFenetre(fenetre);
@@ -55,21 +56,28 @@ public class App {
 
         panel.add(Box.createVerticalGlue());
 
+        // Bouton Création Profil
+        if (DataGame.getInstance().ListePlayer.size() < 4) {
+            panel.add(CreerBtnMenu("Nouveau profil", e -> {
+                TransitionFenetre(fenetre, () -> AfficherMenuCreationProfil(fenetre));
+            }));
+            panel.add(Box.createRigidArea(new Dimension(0, 20)));
+        }
+
+        // Boutons Liste Profils
         for (var player : DataGame.getInstance().ListePlayer) {
-            var btnProfil = CreerBtnMenu(player.Nom, e -> {
-                // 1. Définir le joueur sélectionné
+            panel.add(CreerBtnMenu(player.Nom, e -> {
+                // Définir le joueur sélectionné
                 DataGame.getInstance().CurrentPlayer = player;
                 ClearFenetre(fenetre);
-                // 2. Lancer le jeu
+                // Lancer le jeu
                 TransitionFenetre(fenetre, () -> {
                     // Création de la classe Gameplay
                     Gameplay gameplay = new Gameplay(fenetre);
-                    // Affichage du noeud
+                    // Affichage du noeud du profil
                     gameplay.AfficherNoeud(player.NoeudActuel);
                 });
-            });
-
-            panel.add(btnProfil);
+            }));
             panel.add(Box.createRigidArea(new Dimension(0, 20)));
         }
 
@@ -80,6 +88,68 @@ public class App {
         panel.add(btnRetour);
         panel.add(Box.createVerticalGlue());
 
+        fenetre.add(panel, BorderLayout.CENTER);
+
+        ActualiserFenetre(fenetre);
+    }
+
+    private static void AfficherMenuCreationProfil(JFrame fenetre) {
+        ClearFenetre(fenetre);
+
+        // Crée un panel principal avec marges
+        var panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(Box.createVerticalGlue());
+
+        // Label (texte au-dessus)
+        var label = new JLabel("Entrez votre nom :");
+        label.setFont(new Font("Arial", Font.PLAIN, 18));
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(label);
+
+        // Margin
+        panel.add(Box.createRigidArea(new Dimension(0, 40)));
+
+        // Champ de texte
+        var textField = new JTextField();
+        textField.setFont(new Font("Arial", Font.PLAIN, 16));
+        textField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        textField.setMaximumSize(new Dimension(400, 40));
+        textField.setBorder(
+                BorderFactory.createCompoundBorder(
+                        textField.getBorder(), // Garde la bordure noire d'origine
+                        BorderFactory.createEmptyBorder(10, 10, 10, 10) // Ajoute un padding intérieur
+                ));
+        panel.add(textField);
+
+        // Margin
+        panel.add(Box.createRigidArea(new Dimension(0, 40)));
+
+        // Bouton Valider
+        panel.add(CreerBtnMenu("Valider", e -> {
+            if (TexteSaisieConforme(textField.getText())) {
+                // Creation du profil
+                DataGame.getInstance()
+                        .AjouterPlayer(new Player(textField.getText(), 100, 50, 1, 50, Story.Introduction()));
+
+                // Retour au menu
+                TransitionFenetre(fenetre, () -> AfficherMenuSelectionProfil(fenetre));
+            } else {
+                // Prevenir mauvaise saisie
+                JOptionPane.showMessageDialog(fenetre,
+                        "Le nom doit contenir uniquement des lettres (sans espaces ni caractères spéciaux).", "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }));
+
+        // Margin
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // Bouton Retour
+        panel.add(CreerBtnMenu("Retour", e -> TransitionFenetre(fenetre, () -> AfficherMenuSelectionProfil(fenetre))));
+
+        panel.add(Box.createVerticalGlue());
         fenetre.add(panel, BorderLayout.CENTER);
 
         ActualiserFenetre(fenetre);
@@ -169,6 +239,14 @@ public class App {
         button.setMaximumSize(new Dimension(200, 40));
         button.addActionListener(action);
         return button;
+    }
+
+    private static boolean TexteSaisieConforme(String texte) {
+        if (texte.isBlank() || !texte.matches("[a-zA-ZÀ-ÿ]+")) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }
