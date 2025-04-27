@@ -66,7 +66,13 @@ public class App {
 
         // Boutons Liste Profils
         for (var player : DataGame.getInstance().ListePlayer) {
-            panel.add(CreerBtnMenu(player.Nom, e -> {
+
+            var panelProfils = new JPanel();
+            panelProfils.setLayout(new BoxLayout(panelProfils, BoxLayout.X_AXIS));
+            panelProfils.setAlignmentX(Component.CENTER_ALIGNMENT);
+            panelProfils.add(Box.createHorizontalGlue()); // Espace automatique entre les boutons
+
+            panelProfils.add(CreerBtnMenu(player.Nom, e -> {
                 // Définir le joueur sélectionné
                 DataGame.getInstance().CurrentPlayer = player;
                 ClearFenetre(fenetre);
@@ -78,6 +84,36 @@ public class App {
                     gameplay.AfficherNoeud(player.NoeudActuel);
                 });
             }));
+
+            // Margin
+            panelProfils.add(Box.createRigidArea(new Dimension(10, 0)));
+
+            // Bouton Supprimer Profil
+            var btnCroix = new JButton("X");
+            btnCroix.setFont(new Font("Arial", Font.BOLD, 16));
+            btnCroix.setPreferredSize(new Dimension(20, 20));
+            btnCroix.setMaximumSize(new Dimension(20, 20));
+            btnCroix.setBackground(Color.RED);
+            btnCroix.setForeground(Color.WHITE);
+            btnCroix.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            btnCroix.addActionListener(e -> {
+                int reponse = JOptionPane.showConfirmDialog(fenetre,
+                        "Voulez-vous vraiment supprimer le profil \"" + player.Nom + "\" ?",
+                        "Confirmation",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE);
+
+                // Vérifier la réponse de l'utilisateur
+                if (reponse == JOptionPane.YES_OPTION) {
+                    DataGame.getInstance().SupprimerPlayer(player);
+                }
+                AfficherMenuSelectionProfil(fenetre);
+            });
+
+            panelProfils.add(btnCroix);
+
+            panelProfils.add(Box.createHorizontalGlue());
+            panel.add(panelProfils);
             panel.add(Box.createRigidArea(new Dimension(0, 20)));
         }
 
