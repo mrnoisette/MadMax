@@ -277,6 +277,7 @@ public class App {
         return button;
     }
 
+    // Texte uniquement en string (abcd)
     private static boolean TexteSaisieConforme(String texte) {
         if (texte.isBlank() || !texte.matches("[a-zA-ZÀ-ÿ]+")) {
             return false;

@@ -29,13 +29,8 @@ public class Gameplay {
 
     // Constructeur
     public Gameplay(JFrame fenetre) {
+        App.ClearFenetre(fenetre);
         Fenetre = fenetre;
-
-        // Fenetre
-        // Fenetre = new JFrame("Mad Max");
-        // Fenetre.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        // Fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Fenetre.setLayout(new BorderLayout());
 
         // Infos sur le joueur
         _zoneInfos = new JTextArea();
@@ -73,10 +68,15 @@ public class Gameplay {
         Fenetre.add(centerPanel, BorderLayout.CENTER);
 
         Fenetre.setVisible(true);
+
     }
 
     // Affiche un noeud dans la fenetre
     public void AfficherNoeud(Noeud noeud) {
+
+        if (JoueurMort(_player)) { // Le joueur est mort
+            AfficherEcranMort(Fenetre);
+        }
 
         // Affichage du texte
         if (noeud.Description != null && !noeud.Description.isEmpty()) {
@@ -86,10 +86,10 @@ public class Gameplay {
         // Affichage des infos
         _zoneInfos.setText(
                 _player.Nom + " : \n"
-                        + "\n - Sante = " + _player.Sante
-                        + "\n - Chance = " + _player.Chance
+                        + "\n - Sante = " + _player.Sante 
+                        + "\n - Chance = " + _player.Chance + " %"
                         + "\n - Medikit = " + _player.NbMedikit
-                        + "\n - Argent = " + _player.Argent);
+                        + "\n - Argent = " + _player.Argent + " $");
 
         // Affichage de l'illustration
         if (noeud.Illustration != null) {
@@ -116,9 +116,7 @@ public class Gameplay {
             // TODO
         }
 
-        // Actualiser
-        Fenetre.revalidate();
-        Fenetre.repaint();
+        App.ActualiserFenetre(Fenetre);
     }
 
     // Jouer un audio
@@ -149,8 +147,33 @@ public class Gameplay {
         }
     }
 
+    private void AfficherEcranMort(JFrame fenetre) {
+        App.ClearFenetre(fenetre);
+
+        JLabel texte = new JLabel("Vous êtes mort");
+        texte.setHorizontalAlignment(JLabel.CENTER);
+        texte.setVerticalAlignment(JLabel.CENTER);
+        texte.setFont(new Font("Arial", Font.BOLD, 48));
+        texte.setForeground(Color.RED);
+        texte.setBackground(Color.BLACK);
+        texte.setOpaque(true);
+
+        fenetre.add(texte, BorderLayout.CENTER);
+
+        App.ActualiserFenetre(fenetre);
+    }
+
+    // Verifie si le joueur est vivant
+    private static boolean JoueurMort(Player player) {
+        if (player.Sante <= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Une chance sur deux de retourner vrai (la chance va de 0 à 100)
-    private static boolean estChanceux(int chance) {
+    private static boolean EstChanceux(int chance) {
         Random rand = new Random();
 
         int tirage = rand.nextInt(100);
