@@ -9,13 +9,15 @@ public class Noeud {
     public ImageIcon Illustration;
     public File Audio;
     public ArrayList<Choix> ListeChoix;
+    public boolean Mort;
 
-    public Noeud(int id, String description, ImageIcon illustration, File audio, ArrayList<Choix> listeChoix) {
+    public Noeud(int id, String description, ImageIcon illustration, File audio, ArrayList<Choix> listeChoix, boolean mort) {
         Id = id;
         Description = description;
         Illustration = illustration;
         Audio = audio;
         ListeChoix = listeChoix;
+        Mort = mort;
     }
 
     public static Noeud TrouverNoeudSelonId(int id) {

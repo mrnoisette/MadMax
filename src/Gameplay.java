@@ -74,8 +74,8 @@ public class Gameplay {
     // Affiche un noeud dans la fenetre
     public void AfficherNoeud(Noeud noeud) {
 
-        if (JoueurMort(_player)) { // Le joueur est mort
-            AfficherEcranMort(Fenetre);
+        if (noeud.Mort) { // Le joueur est mort
+            AfficherEcranMort(Fenetre, noeud);
         }
 
         // Affichage du texte
@@ -147,30 +147,40 @@ public class Gameplay {
         }
     }
 
-    private void AfficherEcranMort(JFrame fenetre) {
-        App.ClearFenetre(fenetre);
+    private void AfficherEcranMort(JFrame fenetre, Noeud noeud) {
+    App.ClearFenetre(fenetre);
 
-        JLabel texte = new JLabel("Vous êtes mort");
-        texte.setHorizontalAlignment(JLabel.CENTER);
-        texte.setVerticalAlignment(JLabel.CENTER);
-        texte.setFont(new Font("Arial", Font.BOLD, 48));
-        texte.setForeground(Color.RED);
-        texte.setBackground(Color.BLACK);
-        texte.setOpaque(true);
+    // Panneau principal en noir avec disposition verticale
+    JPanel panel = new JPanel();
+    panel.setBackground(Color.BLACK);
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        fenetre.add(texte, BorderLayout.CENTER);
+    // Titre "Vous êtes mort"
+    JLabel texte = new JLabel("Vous êtes mort");
+    texte.setAlignmentX(Component.CENTER_ALIGNMENT);
+    texte.setFont(new Font("Arial", Font.BOLD, 48));
+    texte.setForeground(Color.RED);
+    texte.setBackground(Color.BLACK);
 
-        App.ActualiserFenetre(fenetre);
-    }
+    // Description (juste en dessous du titre)
+    JLabel description = new JLabel(noeud.Description);
+    description.setAlignmentX(Component.CENTER_ALIGNMENT);
+    description.setFont(new Font("Arial", Font.PLAIN, 18));
+    description.setForeground(Color.WHITE);
+    description.setBackground(Color.BLACK);
 
-    // Verifie si le joueur est vivant
-    private static boolean JoueurMort(Player player) {
-        if (player.Sante <= 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // Espacement autour des labels
+    panel.add(Box.createVerticalGlue());
+    panel.add(texte);
+    panel.add(Box.createRigidArea(new Dimension(0, 20)));
+    panel.add(description);
+    panel.add(Box.createVerticalGlue());
+
+    fenetre.add(panel, BorderLayout.CENTER);
+
+    App.ActualiserFenetre(fenetre);
+}
+
 
     // Une chance sur deux de retourner vrai (la chance va de 0 à 100)
     private static boolean EstChanceux(int chance) {

@@ -35,7 +35,7 @@ public class Story {
         choix1.ProchainNoeud = Commencement();
         listeChoix.add(choix1);
 
-        var noeud = new Noeud(1, description, illustration, null, listeChoix);
+        var noeud = new Noeud(1, description, illustration, null, listeChoix, false);
         return noeud;
     }
 
@@ -58,7 +58,7 @@ public class Story {
         choix1.ProchainNoeud = PanneAutoroute();
         listeChoix.add(choix1);
 
-        var noeud = new Noeud(2, description, illustration, audio, listeChoix);
+        var noeud = new Noeud(2, description, illustration, audio, listeChoix, false);
         return noeud;
     }
 
@@ -86,7 +86,7 @@ public class Story {
         choix2.ProchainNoeud = SeCacher();
         listeChoix.add(choix2);
 
-        var noeud = new Noeud(3, description, illustration, null, listeChoix);
+        var noeud = new Noeud(3, description, illustration, null, listeChoix, false);
         return noeud;
     }
 
@@ -108,14 +108,28 @@ public class Story {
 
         listeChoix.add(choix1);
 
-        return new Noeud(4, description, illustration, audio, listeChoix);
+        return new Noeud(4, description, illustration, audio, listeChoix, false);
     }
 
     public static Noeud FaireStop() {
 
-        // TODO
+         String description = "TEST MORT"
+                + "\n\n"
+                + "AHAH";
 
-        return null;
+        ImageIcon illustration = null; // TODO
+
+        var listeChoix = new ArrayList<Choix>();
+
+        var audio = new File("./assets/sounds/gunfire.wav");
+
+        var choix1 = new Choix();
+        choix1.Libelle = "Continuer";
+        choix1.ProchainNoeud = null; // TODO
+
+        listeChoix.add(choix1);
+
+        return new Noeud(4, description, illustration, audio, listeChoix, true);
     }
 
 }
