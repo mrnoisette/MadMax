@@ -74,6 +74,10 @@ public class Gameplay {
     // Affiche un noeud dans la fenetre
     public void AfficherNoeud(Noeud noeud) {
 
+        // Sauvegarde
+        _player.NoeudActuel = noeud;
+        DataGame.getInstance().Sauvegarder(_player);
+
         if (noeud.Mort) { // Le joueur est mort
             AfficherEcranMort(Fenetre, noeud);
         }

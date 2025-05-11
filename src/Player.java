@@ -16,6 +16,4 @@ public class Player {
         NoeudActuel = noeudActuel;
     }
 
-   
-
 }

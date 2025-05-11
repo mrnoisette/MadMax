@@ -4,21 +4,7 @@ import javax.swing.ImageIcon;
 
 public class Story {
 
-    public static ArrayList<Noeud> ListeNoeud = initialiserListe();
-
-    private static ArrayList<Noeud> initialiserListe() {
-        ArrayList<Noeud> liste = new ArrayList<>();
-
-        liste.add(Introduction());
-        liste.add(Commencement());
-        liste.add(PanneAutoroute());
-        liste.add(SeCacher());
-        liste.add(FaireStop());
-
-        return liste;
-    }
-    
-    public static Noeud Introduction() {
+    public Noeud Introduction() {
 
         String description = "A la suite d'innombrables années d'ignorance, et malgré les alertes que notre planètes nous a envoyé, celle-ci ne pouvait plus encaisser le poids de nos actes.."
                 + "\n\n"
@@ -36,10 +22,11 @@ public class Story {
         listeChoix.add(choix1);
 
         var noeud = new Noeud(1, description, illustration, null, listeChoix, false);
+
         return noeud;
     }
 
-    public static Noeud Commencement() {
+    public Noeud Commencement() {
 
         String description = "En tant qu'agent de police, votre rôle est de vous rendre à San Pedro pour récupérer une citerne d'eau, qui pourra donner un espoir de vie à votre colonie"
                 + "\n\n"
@@ -59,10 +46,11 @@ public class Story {
         listeChoix.add(choix1);
 
         var noeud = new Noeud(2, description, illustration, audio, listeChoix, false);
+
         return noeud;
     }
 
-    public static Noeud PanneAutoroute() {
+    public Noeud PanneAutoroute() {
 
         String description = "Après de longue heures de route, vous avez enfin quitter la ville. Vous ne reconnaissez toutefois aucun des paysages alentour, dans lesquels vous avez pourtant grandi."
                 + "\n\n"
@@ -86,11 +74,10 @@ public class Story {
         choix2.ProchainNoeud = SeCacher();
         listeChoix.add(choix2);
 
-        var noeud = new Noeud(3, description, illustration, null, listeChoix, false);
-        return noeud;
+        return new Noeud(3, description, illustration, null, listeChoix, false);
     }
 
-    public static Noeud SeCacher() {
+    public Noeud SeCacher() {
 
         String description = "Un panneau publicitaire se trouvant à votre gauche, vous vous y précipité rapidement pour vous y cacher."
                 + "\n\n"
@@ -108,12 +95,14 @@ public class Story {
 
         listeChoix.add(choix1);
 
+        // TEST
+
         return new Noeud(4, description, illustration, audio, listeChoix, false);
     }
 
-    public static Noeud FaireStop() {
+    public Noeud FaireStop() {
 
-         String description = "TEST MORT"
+        String description = "TEST MORT"
                 + "\n\n"
                 + "AHAH";
 
