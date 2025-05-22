@@ -10,15 +10,17 @@ public class Noeud {
     public File Audio;
     public ArrayList<Choix> ListeChoix;
     public boolean Mort;
+    public int Degat;
 
     public Noeud(int id, String description, ImageIcon illustration, File audio, ArrayList<Choix> listeChoix,
-            boolean mort) {
-        Id = id;
-        Description = description;
-        Illustration = illustration;
-        Audio = audio;
-        ListeChoix = listeChoix;
-        Mort = mort;
+            boolean mort, int degat) {
+        this.Id = id;
+        this.Description = description;
+        this.Illustration = illustration;
+        this.Audio = audio;
+        this.ListeChoix = listeChoix;
+        this.Mort = mort;
+        this.Degat = degat;
     }
 
 }

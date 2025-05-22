@@ -78,7 +78,10 @@ public class Gameplay {
         _player.NoeudActuel = noeud;
         DataGame.getInstance().Sauvegarder(_player);
 
-        if (noeud.Mort) { // Le joueur est mort
+        // Infliger les dégats s'il y en a
+        _player.Sante -= noeud.Degat;
+
+        if (noeud.Mort || _player.Sante <= 0) { // Le joueur est mort
             AfficherEcranMort(Fenetre, noeud);
         }
 
@@ -90,7 +93,7 @@ public class Gameplay {
         // Affichage des infos
         _zoneInfos.setText(
                 _player.Nom + " : \n"
-                        + "\n - Sante = " + _player.Sante 
+                        + "\n - Sante = " + _player.Sante
                         + "\n - Chance = " + _player.Chance + " %"
                         + "\n - Medikit = " + _player.NbMedikit
                         + "\n - Argent = " + _player.Argent + " $");
@@ -152,39 +155,38 @@ public class Gameplay {
     }
 
     private void AfficherEcranMort(JFrame fenetre, Noeud noeud) {
-    App.ClearFenetre(fenetre);
+        App.ClearFenetre(fenetre);
 
-    // Panneau principal en noir avec disposition verticale
-    JPanel panel = new JPanel();
-    panel.setBackground(Color.BLACK);
-    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        // Panneau principal en noir avec disposition verticale
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.BLACK);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-    // Titre "Vous êtes mort"
-    JLabel texte = new JLabel("Vous êtes mort");
-    texte.setAlignmentX(Component.CENTER_ALIGNMENT);
-    texte.setFont(new Font("Arial", Font.BOLD, 48));
-    texte.setForeground(Color.RED);
-    texte.setBackground(Color.BLACK);
+        // Titre "Vous êtes mort"
+        JLabel texte = new JLabel("Vous êtes mort");
+        texte.setAlignmentX(Component.CENTER_ALIGNMENT);
+        texte.setFont(new Font("Arial", Font.BOLD, 48));
+        texte.setForeground(Color.RED);
+        texte.setBackground(Color.BLACK);
 
-    // Description (juste en dessous du titre)
-    JLabel description = new JLabel(noeud.Description);
-    description.setAlignmentX(Component.CENTER_ALIGNMENT);
-    description.setFont(new Font("Arial", Font.PLAIN, 18));
-    description.setForeground(Color.WHITE);
-    description.setBackground(Color.BLACK);
+        // Description (juste en dessous du titre)
+        JLabel description = new JLabel(_player.Sante <= 0 ? noeud.Description : "");
+        description.setAlignmentX(Component.CENTER_ALIGNMENT);
+        description.setFont(new Font("Arial", Font.PLAIN, 18));
+        description.setForeground(Color.WHITE);
+        description.setBackground(Color.BLACK);
 
-    // Espacement autour des labels
-    panel.add(Box.createVerticalGlue());
-    panel.add(texte);
-    panel.add(Box.createRigidArea(new Dimension(0, 20)));
-    panel.add(description);
-    panel.add(Box.createVerticalGlue());
+        // Espacement autour des labels
+        panel.add(Box.createVerticalGlue());
+        panel.add(texte);
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+        panel.add(description);
+        panel.add(Box.createVerticalGlue());
 
-    fenetre.add(panel, BorderLayout.CENTER);
+        fenetre.add(panel, BorderLayout.CENTER);
 
-    App.ActualiserFenetre(fenetre);
-}
-
+        App.ActualiserFenetre(fenetre);
+    }
 
     // Une chance sur deux de retourner vrai (la chance va de 0 à 100)
     private static boolean EstChanceux(int chance) {

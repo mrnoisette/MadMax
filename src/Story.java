@@ -21,7 +21,7 @@ public class Story {
         choix1.ProchainNoeud = Commencement();
         listeChoix.add(choix1);
 
-        var noeud = new Noeud(1, description, illustration, null, listeChoix, false);
+        var noeud = new Noeud(1, description, illustration, null, listeChoix, false, 0);
 
         return noeud;
     }
@@ -45,7 +45,7 @@ public class Story {
         choix1.ProchainNoeud = PanneAutoroute();
         listeChoix.add(choix1);
 
-        var noeud = new Noeud(2, description, illustration, audio, listeChoix, false);
+        var noeud = new Noeud(2, description, illustration, audio, listeChoix, false, 0);
 
         return noeud;
     }
@@ -74,7 +74,7 @@ public class Story {
         choix2.ProchainNoeud = SeCacher();
         listeChoix.add(choix2);
 
-        return new Noeud(3, description, illustration, null, listeChoix, false);
+        return new Noeud(3, description, illustration, null, listeChoix, false, 0);
     }
 
     public Noeud SeCacher() {
@@ -95,9 +95,7 @@ public class Story {
 
         listeChoix.add(choix1);
 
-        // TEST
-
-        return new Noeud(4, description, illustration, audio, listeChoix, false);
+        return new Noeud(4, description, illustration, audio, listeChoix, false, 10);
     }
 
     public Noeud FaireStop() {
@@ -118,7 +116,7 @@ public class Story {
 
         listeChoix.add(choix1);
 
-        return new Noeud(4, description, illustration, audio, listeChoix, true);
+        return new Noeud(5, description, illustration, audio, listeChoix, true, 0);
     }
 
 }
