@@ -17,8 +17,8 @@ public class Noeud {
         this.Id = id;
         this.Description = description;
         this.Illustration = illustration;
-        this.Audio = audio;
-        this.ListeChoix = listeChoix;
+        this.Audio = (audio != null) ? audio : new File[0]; // Sécurisation ici
+        this.ListeChoix = (listeChoix != null) ? listeChoix : new ArrayList<>(); // Bonus : sécurise aussi les choix
         this.Mort = mort;
         this.Degat = degat;
     }

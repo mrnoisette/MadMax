@@ -107,8 +107,12 @@ public class Gameplay {
         }
 
         // Lecture de l'audio
-        JouerMusique(noeud.Audio[0]); // Musique [0]
-        JouerVoix(noeud.Audio[1]); // Voix [1] // TODO : Faire une seule fonction
+        if (noeud.Audio.length > 0 && noeud.Audio[0] != null) {
+            JouerAudio(noeud.Audio[0], true); // Musique
+        }
+        if (noeud.Audio.length > 1 && noeud.Audio[1] != null) {
+            JouerAudio(noeud.Audio[1], false); // Voix
+        }
 
         // Affichage des choix
         _zoneBoutons.removeAll();
@@ -128,59 +132,52 @@ public class Gameplay {
         App.ActualiserFenetre(Fenetre);
     }
 
-    // Jouer un audio
-    private void JouerMusique(File file) {
-        if (_musique != null && _musique.isRunning()) {
-            _musique.stop();
-            _musique.close();
-        }
+    private void JouerAudio(File file, boolean estMusique) {
         if (file == null)
             return;
 
-        try {
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            _musique = AudioSystem.getClip();
-            _musique.open(audioStream);
+        Clip clip = estMusique ? _musique : _voix;
 
-            FloatControl gainControl = (FloatControl) _musique.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-15.0f); 
-
-            _musique.start();
-
-            // Écouter la fin du son pour réinitialiser l'état
-            _musique.addLineListener(event -> {
-                if (event.getType() == LineEvent.Type.STOP) {
-                    _musique.close();
-                    _musique = null;
-                }
-            });
-
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.err.println("Erreur lors de la lecture du son : " + e.getMessage());
+        // Arrêter et fermer l'ancien clip s'il est en cours
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+            if (clip != null) {
+                clip.close();
+            }
         }
-    }
-
-    private void JouerVoix(File file) {
-        if (_voix != null && _voix.isRunning()) {
-            _voix.stop();
-            _voix.close();
-        }
-        if (file == null)
-            return;
 
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            _voix = AudioSystem.getClip();
-            _voix.open(audioStream);
-            _voix.start();
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
+
+            // Réduction du volume uniquement pour la musique
+            if (estMusique) {
+                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                gainControl.setValue(-15.0f);
+            }
+
+            clip.start();
 
             // Écouter la fin du son pour réinitialiser l'état
-            _voix.addLineListener(event -> {
+            Clip finalClip = clip;
+            clip.addLineListener(event -> {
                 if (event.getType() == LineEvent.Type.STOP) {
-                    _voix.close();
-                    _voix = null;
+                    finalClip.close();
+                    if (estMusique) {
+                        _musique = null;
+                    } else {
+                        _voix = null;
+                    }
                 }
             });
+
+            // Mettre à jour le bon champ
+            if (estMusique) {
+                _musique = clip;
+            } else {
+                _voix = clip;
+            }
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.err.println("Erreur lors de la lecture du son : " + e.getMessage());
@@ -203,7 +200,7 @@ public class Gameplay {
         texte.setBackground(Color.BLACK);
 
         // Description (juste en dessous du titre)
-        JLabel description = new JLabel(_player.Sante <= 0 ? noeud.Description : "");
+        JLabel description = new JLabel(_player.Sante <= 0 ? "" : noeud.Description);
         description.setAlignmentX(Component.CENTER_ALIGNMENT);
         description.setFont(new Font("Arial", Font.PLAIN, 18));
         description.setForeground(Color.WHITE);
