@@ -4,15 +4,18 @@ import javax.swing.ImageIcon;
 
 public class Story {
 
+    // Text to speech : https://elevenlabs.io/fr/text-to-speech/french
+
     public Noeud Introduction() {
 
-        String description = "A la suite d'innombrables années d'ignorance, et malgré les alertes que notre planètes nous a envoyé, celle-ci ne pouvait plus encaisser le poids de nos actes.."
-                + "\n\n"
-                + "La sécheresse, issues de l'épuisement de l'ensemble des ressources planétaires, emmena l'humanité dans ses tréfonds, et l'avènement d'une époque sinitre faisait surface."
-                + "\n\n"
-                + "Désormais, le pétrol, et l'eau, étaient les seules denrées qui avaient de la valeur dans ce monde...";
+        String description = "À la suite d'innombrables années d'ignorance, et malgré les alertes que notre planète nous a envoyé, celle-ci ne pouvait plus encaisser le poids de nos actes. La sécheresse. Issues de l'épuisement de l'ensemble des ressources planétaires, emmena l'humanité dans des tréfonds irréversibles, et l'avènement d'une époque sinistre faisait surface... Désormais, le pétrole et l'eau, étaient les seules denrées qui avaient de la valeur dans ce monde intrépide, en proie à la désolation...";
 
         ImageIcon illustration = new ImageIcon("./assets/images/introduction.jpeg");
+
+        File[] audio = {
+                new File("./assets/sounds/gunfire.wav"), // TEST
+                new File("./assets/sounds/introduction.wav")
+        };
 
         var listeChoix = new ArrayList<Choix>();
 
@@ -21,7 +24,7 @@ public class Story {
         choix1.ProchainNoeud = Commencement();
         listeChoix.add(choix1);
 
-        var noeud = new Noeud(1, description, illustration, null, listeChoix, false, 0);
+        var noeud = new Noeud(1, description, illustration, audio, listeChoix, false, 0);
 
         return noeud;
     }
@@ -36,7 +39,10 @@ public class Story {
 
         ImageIcon illustration = new ImageIcon("./assets/images/interceptor.jpeg");
 
-        var audio = new File("./assets/sounds/motor.wav");
+        File[] audio = {
+                null,
+                new File("./assets/sounds/motor.wav")
+        };
 
         var listeChoix = new ArrayList<Choix>();
 
@@ -87,7 +93,10 @@ public class Story {
 
         var listeChoix = new ArrayList<Choix>();
 
-        var audio = new File("./assets/sounds/gunfire.wav");
+        File[] audio = {
+                null,
+                new File("./assets/sounds/gunfire.wav")
+        };
 
         var choix1 = new Choix();
         choix1.Libelle = "Continuer";
@@ -108,15 +117,13 @@ public class Story {
 
         var listeChoix = new ArrayList<Choix>();
 
-        var audio = new File("./assets/sounds/gunfire.wav");
-
         var choix1 = new Choix();
         choix1.Libelle = "Continuer";
         choix1.ProchainNoeud = null; // TODO
 
         listeChoix.add(choix1);
 
-        return new Noeud(5, description, illustration, audio, listeChoix, true, 0);
+        return new Noeud(5, description, illustration, null, listeChoix, true, 0);
     }
 
 }

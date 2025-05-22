@@ -7,12 +7,12 @@ public class Noeud {
     public int Id;
     public String Description;
     public ImageIcon Illustration;
-    public File Audio;
+    public File[] Audio;
     public ArrayList<Choix> ListeChoix;
     public boolean Mort;
     public int Degat;
 
-    public Noeud(int id, String description, ImageIcon illustration, File audio, ArrayList<Choix> listeChoix,
+    public Noeud(int id, String description, ImageIcon illustration, File[] audio, ArrayList<Choix> listeChoix,
             boolean mort, int degat) {
         this.Id = id;
         this.Description = description;

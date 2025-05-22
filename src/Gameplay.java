@@ -22,7 +22,8 @@ public class Gameplay {
     private JPanel _zoneBoutons;
 
     // Audio
-    private Clip _audio;
+    private Clip _musique;
+    private Clip _voix;
 
     // Joueur
     private Player _player = DataGame.getInstance().CurrentPlayer;
@@ -106,7 +107,8 @@ public class Gameplay {
         }
 
         // Lecture de l'audio
-        JouerSon(noeud.Audio);
+        JouerMusique(noeud.Audio[0]); // Musique [0]
+        JouerVoix(noeud.Audio[1]); // Voix [1] // TODO : Faire une seule fonction
 
         // Affichage des choix
         _zoneBoutons.removeAll();
@@ -127,25 +129,56 @@ public class Gameplay {
     }
 
     // Jouer un audio
-    private void JouerSon(File file) {
-        if (_audio != null && _audio.isRunning()) {
-            _audio.stop();
-            _audio.close();
+    private void JouerMusique(File file) {
+        if (_musique != null && _musique.isRunning()) {
+            _musique.stop();
+            _musique.close();
         }
         if (file == null)
             return;
 
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            _audio = AudioSystem.getClip();
-            _audio.open(audioStream);
-            _audio.start();
+            _musique = AudioSystem.getClip();
+            _musique.open(audioStream);
+
+            FloatControl gainControl = (FloatControl) _musique.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-15.0f); 
+
+            _musique.start();
 
             // Écouter la fin du son pour réinitialiser l'état
-            _audio.addLineListener(event -> {
+            _musique.addLineListener(event -> {
                 if (event.getType() == LineEvent.Type.STOP) {
-                    _audio.close();
-                    _audio = null;
+                    _musique.close();
+                    _musique = null;
+                }
+            });
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.err.println("Erreur lors de la lecture du son : " + e.getMessage());
+        }
+    }
+
+    private void JouerVoix(File file) {
+        if (_voix != null && _voix.isRunning()) {
+            _voix.stop();
+            _voix.close();
+        }
+        if (file == null)
+            return;
+
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            _voix = AudioSystem.getClip();
+            _voix.open(audioStream);
+            _voix.start();
+
+            // Écouter la fin du son pour réinitialiser l'état
+            _voix.addLineListener(event -> {
+                if (event.getType() == LineEvent.Type.STOP) {
+                    _voix.close();
+                    _voix = null;
                 }
             });
 
