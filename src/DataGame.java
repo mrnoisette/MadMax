@@ -6,10 +6,15 @@ import javax.sound.sampled.Clip;
 public class DataGame {
     private static DataGame _instance;
 
-    private AccesCSV _acces;
+    // Acces au fichier CSV (Players)
+    private AccesCSV _accesCSV;
+
+    // Acces au fichier JSON (Noeuds)
+    private AccesXML _accesXML;
 
     private DataGame() {
-        _acces = new AccesCSV();
+        _accesCSV = new AccesCSV();
+        _accesXML = new AccesXML();
     }
 
     // Synchronized pour eviter le partage de données obsolettes entre deux threads
@@ -22,32 +27,25 @@ public class DataGame {
 
     // ------------------------------------------------
 
-    public Clip SystemeAudio;
+    public Clip Clip_Narration;
+    public Clip Clip_Musique;
 
     public Player CurrentPlayer;
 
     private ArrayList<Noeud> _listeNoeud;
+
     public ArrayList<Noeud> getListeNoeuds() {
         if (_listeNoeud == null) {
-            _listeNoeud = new ArrayList<Noeud>();
-            Story story = new Story();
-
-            _listeNoeud.add(story.Introduction());
-            _listeNoeud.add(story.Commencement());
-            _listeNoeud.add(story.PanneAutoroute());
-            _listeNoeud.add(story.FaireStop());
-            _listeNoeud.add(story.SeCacher());
-
-            return _listeNoeud;
-        } else {
-            return _listeNoeud;
+            _listeNoeud = new ArrayList<Noeud>(_accesXML.LireListeNoeud());
         }
+        return _listeNoeud;
     }
 
     private ArrayList<Player> _listePlayer;
+
     public ArrayList<Player> getListePlayer() {
         if (_listePlayer == null) {
-            _listePlayer = new ArrayList<Player>(_acces.LireListePlayer());
+            _listePlayer = new ArrayList<Player>(_accesCSV.LireListePlayer());
             return _listePlayer;
         } else {
             return _listePlayer;
@@ -59,7 +57,7 @@ public class DataGame {
             if (_listePlayer.contains(player)) {
                 return;
             }
-            _acces.InsererPlayer(player);
+            _accesCSV.InsererPlayer(player);
             _listePlayer.add(player);
         } catch (Exception e) {
 
@@ -68,7 +66,7 @@ public class DataGame {
 
     public void Sauvegarder(Player player) {
         try {
-            _acces.Sauvegarder(player);
+            _accesCSV.Sauvegarder(player);
         } catch (Exception e) {
 
         }
@@ -76,7 +74,7 @@ public class DataGame {
 
     public void SupprimerPlayer(Player player) {
         try {
-            _acces.SupprimerPlayer(player);
+            _accesCSV.SupprimerPlayer(player);
             _listePlayer.remove(player);
         } catch (Exception e) {
 
