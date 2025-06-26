@@ -107,7 +107,7 @@ public class Gameplay {
         }
 
         // Lecture de l'audio
-        noeud.JouerAudio();
+        noeud.JouerAudios();
 
         // Affichage des choix
         _zoneBoutons.removeAll();
