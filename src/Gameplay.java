@@ -82,7 +82,7 @@ public class Gameplay {
         // Infliger les dégats s'il y en a
         _player.Sante -= noeud.Degat;
 
-        if (noeud.Mort || _player.Sante <= 0) { // Le joueur est mort
+        if (noeud.EstMortel || _player.Sante <= 0) { // Le joueur est mort
             AfficherEcranMort(Fenetre, noeud);
         }
 
@@ -107,12 +107,7 @@ public class Gameplay {
         }
 
         // Lecture de l'audio
-        if (noeud.Audio.length > 0 && noeud.Audio[0] != null) {
-            JouerAudio(noeud.Audio[0], true); // Musique
-        }
-        if (noeud.Audio.length > 1 && noeud.Audio[1] != null) {
-            JouerAudio(noeud.Audio[1], false); // Voix
-        }
+        noeud.JouerAudio();
 
         // Affichage des choix
         _zoneBoutons.removeAll();
@@ -130,58 +125,6 @@ public class Gameplay {
         }
 
         App.ActualiserFenetre(Fenetre);
-    }
-
-    private void JouerAudio(File file, boolean estMusique) {
-        if (file == null)
-            return;
-
-        Clip clip = estMusique ? _musique : _voix;
-
-        // Arrêter et fermer l'ancien clip s'il est en cours
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
-            if (clip != null) {
-                clip.close();
-            }
-        }
-
-        try {
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            clip = AudioSystem.getClip();
-            clip.open(audioStream);
-
-            // Réduction du volume uniquement pour la musique
-            if (estMusique) {
-                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                gainControl.setValue(-15.0f);
-            }
-
-            clip.start();
-
-            // Écouter la fin du son pour réinitialiser l'état
-            Clip finalClip = clip;
-            clip.addLineListener(event -> {
-                if (event.getType() == LineEvent.Type.STOP) {
-                    finalClip.close();
-                    if (estMusique) {
-                        _musique = null;
-                    } else {
-                        _voix = null;
-                    }
-                }
-            });
-
-            // Mettre à jour le bon champ
-            if (estMusique) {
-                _musique = clip;
-            } else {
-                _voix = clip;
-            }
-
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.err.println("Erreur lors de la lecture du son : " + e.getMessage());
-        }
     }
 
     private void AfficherEcranMort(JFrame fenetre, Noeud noeud) {

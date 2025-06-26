@@ -1,0 +1,65 @@
+<listeNoeud>
+    <noeud id="1">
+        <description>À la suite d'innombrables années d'ignorance, et malgré les alertes que notre
+            planète nous a envoyé, celle-ci ne pouvait plus encaisser le poids de nos actes. La
+            sécheresse. Issues de l'épuisement de l'ensemble des ressources planétaires, emmena
+            l'humanité dans des tréfonds irréversibles, et l'avènement d'une époque sinistre faisait
+            surface... Désormais, le pétrole et l'eau, étaient les seules denrées qui avaient de la
+            valeur dans ce monde intrépide, en proie à la désolation...</description>
+        <illustration>./assets/images/introduction.jpeg</illustration>
+        <narration>./assets/sounds/introduction.wav</narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Continuer">2</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="2">
+        <description>En tant qu'agent de police, votre rôle est de vous rendre à San Pedro pour
+            récupérer une citerne d'eau, qui pourra donner un espoir de vie à votre colonie. Afin de
+            pouvoir braver cet impitoyable desert et ses dangers, votre équipe vous a spécialement
+            préparé une Dodge Interceptor. À son bord, un V8 compresseur GT Turbo 16 soupapes
+            atmosphérique décranté. Avec ça, vous
+            n'aurez aucun obstacle...</description>
+        <illustration>./assets/images/interceptor.jpeg</illustration>
+        <narration>/assets/sounds/commencement.wav</narration>
+        <musique>/assets/sounds/motor.wav</musique>
+        <listeChoix>
+            <choix libelle="Continuer">3</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="3">
+        <description>Après de longue heures de route, vous avez enfin quitter la ville. Vous ne
+            reconnaissez toutefois aucun des paysages alentour, dans lesquels vous avez pourtant
+            grandi. Plongez dans vos souvenir, un bruit sourd vous secous, faisant vibrer la caisse
+            de l'interceptor dans tous les sens. Pris de panique, vous vous arretez sur le bas coté,
+            ouvrez le capot, et vous êtes pris d'une toux éttoufante avec toute cette fumée qui sort
+            du moteur. Votre véhicule à surchauffer, et le liquide de refroidissement s'est
+            évaporée. Vous devez en retrouver pour continuer. Vous appercevez néanmoins une
+            silhouette au loins. Il s'agit d'un camion qui approche. Que faites-vous ?</description>
+        <illustration>./assets/images/panneAutoroute.png</illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Faire du stop">4</choix>
+            <choix libelle="Se cacher">5</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="4">
+        <description>Le véhicule approchant peu à peu, vous dicerner une bande de bandit.
+            Vous auriez dû vous cacher...</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Continuer">0</choix>
+        </listeChoix>
+        <estMortel>true</estMortel>
+        <degat></degat>
+    </noeud>
+</listeNoeud>

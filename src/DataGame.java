@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javax.sound.sampled.Clip;
+
 // Singleton thread safe 
 public class DataGame {
     private static DataGame _instance;
@@ -18,10 +20,13 @@ public class DataGame {
         return _instance;
     }
 
+    // ------------------------------------------------
+
+    public Clip SystemeAudio;
+
     public Player CurrentPlayer;
 
     private ArrayList<Noeud> _listeNoeud;
-
     public ArrayList<Noeud> getListeNoeuds() {
         if (_listeNoeud == null) {
             _listeNoeud = new ArrayList<Noeud>();
@@ -40,7 +45,6 @@ public class DataGame {
     }
 
     private ArrayList<Player> _listePlayer;
-
     public ArrayList<Player> getListePlayer() {
         if (_listePlayer == null) {
             _listePlayer = new ArrayList<Player>(_acces.LireListePlayer());
