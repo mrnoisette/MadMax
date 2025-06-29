@@ -23,8 +23,8 @@
             atmosphérique décranté. Avec ça, vous
             n'aurez aucun obstacle...</description>
         <illustration>./assets/images/interceptor.jpeg</illustration>
-        <narration>/assets/sounds/commencement.wav</narration>
-        <musique>/assets/sounds/motor.wav</musique>
+        <narration>./assets/sounds/commencement.wav</narration>
+        <musique>./assets/sounds/motor.wav</musique>
         <listeChoix>
             <choix libelle="Continuer">3</choix>
         </listeChoix>
@@ -54,8 +54,8 @@
         <description>Le véhicule approchant peu à peu, vous dicerner une bande de bandit.
             Vous auriez dû vous cacher...</description>
         <illustration></illustration>
-        <narration></narration>
-        <musique></musique>
+        <narration>./assets/sounds/introduction.wav</narration>
+        <musique>./assets/sounds/death.wav</musique>
         <listeChoix>
         </listeChoix>
         <estMortel>true</estMortel>

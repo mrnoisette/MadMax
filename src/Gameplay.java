@@ -120,9 +120,7 @@ public class Gameplay {
                 });
                 _zoneBoutons.add(bouton);
             }
-        } else { // Pas de choix
-            // TODO
-        }
+        } 
 
         App.ActualiserFenetre(Fenetre);
     }
