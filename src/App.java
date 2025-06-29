@@ -57,7 +57,7 @@ public class App {
         panel.add(Box.createVerticalGlue());
 
         // Bouton Création Profil
-        if (DataGame.getInstance().ListePlayer.size() < 4) {
+        if (DataGame.getInstance().getListePlayer().size() < 4) {
             panel.add(CreerBtnMenu("Nouveau profil", e -> {
                 TransitionFenetre(fenetre, () -> AfficherMenuCreationProfil(fenetre));
             }));
@@ -65,7 +65,7 @@ public class App {
         }
 
         // Boutons Liste Profils
-        for (var player : DataGame.getInstance().ListePlayer) {
+        for (var player : DataGame.getInstance().getListePlayer()) {
 
             var panelProfils = new JPanel();
             panelProfils.setLayout(new BoxLayout(panelProfils, BoxLayout.X_AXIS));
@@ -167,7 +167,7 @@ public class App {
             if (TexteSaisieConforme(textField.getText())) {
                 // Creation du profil
                 DataGame.getInstance()
-                        .AjouterPlayer(new Player(textField.getText(), 100, 50, 1, 50, Story.Introduction()));
+                        .AjouterPlayer(new Player(textField.getText(), 100, 50, 1, 50, DataGame.getInstance().getListeNoeuds().get(0)));
 
                 // Retour au menu
                 TransitionFenetre(fenetre, () -> AfficherMenuSelectionProfil(fenetre));
@@ -277,6 +277,7 @@ public class App {
         return button;
     }
 
+    // Texte uniquement en string (abcd)
     private static boolean TexteSaisieConforme(String texte) {
         if (texte.isBlank() || !texte.matches("[a-zA-ZÀ-ÿ]+")) {
             return false;

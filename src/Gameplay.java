@@ -22,20 +22,16 @@ public class Gameplay {
     private JPanel _zoneBoutons;
 
     // Audio
-    private Clip _audio;
+    private Clip _musique;
+    private Clip _voix;
 
     // Joueur
     private Player _player = DataGame.getInstance().CurrentPlayer;
 
     // Constructeur
     public Gameplay(JFrame fenetre) {
+        App.ClearFenetre(fenetre);
         Fenetre = fenetre;
-
-        // Fenetre
-        // Fenetre = new JFrame("Mad Max");
-        // Fenetre.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        // Fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Fenetre.setLayout(new BorderLayout());
 
         // Infos sur le joueur
         _zoneInfos = new JTextArea();
@@ -73,10 +69,22 @@ public class Gameplay {
         Fenetre.add(centerPanel, BorderLayout.CENTER);
 
         Fenetre.setVisible(true);
+
     }
 
     // Affiche un noeud dans la fenetre
     public void AfficherNoeud(Noeud noeud) {
+
+        // Sauvegarde
+        _player.NoeudActuel = noeud;
+        DataGame.getInstance().Sauvegarder(_player);
+
+        // Infliger les dégats s'il y en a
+        _player.Sante -= noeud.Degat;
+
+        if (noeud.EstMortel || _player.Sante <= 0) { // Le joueur est mort
+            AfficherEcranMort(Fenetre, noeud);
+        }
 
         // Affichage du texte
         if (noeud.Description != null && !noeud.Description.isEmpty()) {
@@ -87,9 +95,9 @@ public class Gameplay {
         _zoneInfos.setText(
                 _player.Nom + " : \n"
                         + "\n - Sante = " + _player.Sante
-                        + "\n - Chance = " + _player.Chance
+                        + "\n - Chance = " + _player.Chance + " %"
                         + "\n - Medikit = " + _player.NbMedikit
-                        + "\n - Argent = " + _player.Argent);
+                        + "\n - Argent = " + _player.Argent + " $");
 
         // Affichage de l'illustration
         if (noeud.Illustration != null) {
@@ -99,7 +107,7 @@ public class Gameplay {
         }
 
         // Lecture de l'audio
-        JouerSon(noeud.Audio);
+        noeud.JouerAudios();
 
         // Affichage des choix
         _zoneBoutons.removeAll();
@@ -112,45 +120,47 @@ public class Gameplay {
                 });
                 _zoneBoutons.add(bouton);
             }
-        } else { // Pas de choix
-            // TODO
-        }
+        } 
 
-        // Actualiser
-        Fenetre.revalidate();
-        Fenetre.repaint();
+        App.ActualiserFenetre(Fenetre);
     }
 
-    // Jouer un audio
-    private void JouerSon(File file) {
-        if (_audio != null && _audio.isRunning()) {
-            _audio.stop();
-            _audio.close();
-        }
-        if (file == null)
-            return;
+    private void AfficherEcranMort(JFrame fenetre, Noeud noeud) {
+        App.ClearFenetre(fenetre);
 
-        try {
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            _audio = AudioSystem.getClip();
-            _audio.open(audioStream);
-            _audio.start();
+        // Panneau principal en noir avec disposition verticale
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.BLACK);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-            // Écouter la fin du son pour réinitialiser l'état
-            _audio.addLineListener(event -> {
-                if (event.getType() == LineEvent.Type.STOP) {
-                    _audio.close();
-                    _audio = null;
-                }
-            });
+        // Titre "Vous êtes mort"
+        JLabel texte = new JLabel("Vous êtes mort");
+        texte.setAlignmentX(Component.CENTER_ALIGNMENT);
+        texte.setFont(new Font("Arial", Font.BOLD, 48));
+        texte.setForeground(Color.RED);
+        texte.setBackground(Color.BLACK);
 
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.err.println("Erreur lors de la lecture du son : " + e.getMessage());
-        }
+        // Description (juste en dessous du titre)
+        JLabel description = new JLabel(_player.Sante <= 0 ? "" : noeud.Description);
+        description.setAlignmentX(Component.CENTER_ALIGNMENT);
+        description.setFont(new Font("Arial", Font.PLAIN, 18));
+        description.setForeground(Color.WHITE);
+        description.setBackground(Color.BLACK);
+
+        // Espacement autour des labels
+        panel.add(Box.createVerticalGlue());
+        panel.add(texte);
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+        panel.add(description);
+        panel.add(Box.createVerticalGlue());
+
+        fenetre.add(panel, BorderLayout.CENTER);
+
+        App.ActualiserFenetre(fenetre);
     }
 
     // Une chance sur deux de retourner vrai (la chance va de 0 à 100)
-    private static boolean estChanceux(int chance) {
+    private static boolean EstChanceux(int chance) {
         Random rand = new Random();
 
         int tirage = rand.nextInt(100);
