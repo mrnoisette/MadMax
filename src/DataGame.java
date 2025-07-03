@@ -30,10 +30,9 @@ public class DataGame {
     public Clip Clip_Narration;
     public Clip Clip_Musique;
 
-    public Player CurrentPlayer;
+    public Player Player;
 
     private ArrayList<Noeud> _listeNoeud;
-
     public ArrayList<Noeud> getListeNoeuds() {
         if (_listeNoeud == null) {
             _listeNoeud = new ArrayList<Noeud>(_accesXML.LireListeNoeud());
@@ -42,7 +41,6 @@ public class DataGame {
     }
 
     private ArrayList<Player> _listePlayer;
-
     public ArrayList<Player> getListePlayer() {
         if (_listePlayer == null) {
             _listePlayer = new ArrayList<Player>(_accesCSV.LireListePlayer());
