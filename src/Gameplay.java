@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class Gameplay {
@@ -52,41 +53,39 @@ public class Gameplay {
         _zoneBoutons = new JPanel();
         _zoneBoutons.setBorder(BorderFactory.createTitledBorder("Actions"));
         _zoneBoutons.setLayout(new FlowLayout());
-        _zoneBoutons.add(new JButton("Action 1"));
-        _zoneBoutons.add(new JButton("Action 2"));
+        var boutonSoin = new JButton("Se soigner");
+        boutonSoin.addActionListener(e -> {
+            _player.SeSoigner();
+            AfficherInfoPlayer(fenetre);
+        });
+        _zoneBoutons.add(boutonSoin);
         bandeauLateral.add(_zoneBoutons);
-
         Fenetre.add(bandeauLateral, BorderLayout.WEST);
 
-        // === CENTRE : zoneImage au centre, zoneDescription en bas ===
         JPanel centrePanel = new JPanel(new BorderLayout());
 
         // zoneImage
-        _zoneImage = new JLabel("Image ici", SwingConstants.CENTER);
+        _zoneImage = new JLabel("", SwingConstants.CENTER);
         _zoneImage.setPreferredSize(new Dimension(400, 300));
-        _zoneImage.setBorder(BorderFactory.createTitledBorder("Illustration"));
+        _zoneImage.setBorder(BorderFactory.createTitledBorder(""));
         centrePanel.add(_zoneImage, BorderLayout.CENTER);
 
         // zoneDescription
-        _zoneDescription = new JTextArea("Description...");
+        _zoneDescription = new JTextArea("");
         _zoneDescription.setEditable(false);
         _zoneDescription.setBackground(Color.BLACK);
         _zoneDescription.setForeground(Color.WHITE);
         _zoneDescription.setLineWrap(true);
         _zoneDescription.setWrapStyleWord(true);
-        _zoneDescription.setBorder(BorderFactory.createTitledBorder("Zone Description"));
+        _zoneDescription.setBorder(BorderFactory.createTitledBorder(""));
         _zoneDescription.setPreferredSize(new Dimension(400, 100));
         centrePanel.add(_zoneDescription, BorderLayout.SOUTH);
-
         Fenetre.add(centrePanel, BorderLayout.CENTER);
 
-        // === SUD : zoneChoix ===
+        // zoneChoix
         _zoneChoix = new JPanel();
-        _zoneChoix.setBorder(BorderFactory.createTitledBorder("Zone Choix"));
+        _zoneChoix.setBorder(BorderFactory.createTitledBorder("Choix possibles"));
         _zoneChoix.setLayout(new FlowLayout());
-        _zoneChoix.add(new JButton("Choix 1"));
-        _zoneChoix.add(new JButton("Choix 2"));
-
         Fenetre.add(_zoneChoix, BorderLayout.SOUTH);
 
         Fenetre.setSize(800, 600);
@@ -114,12 +113,7 @@ public class Gameplay {
         }
 
         // Affichage des infos
-        _zoneInfos.setText(
-                _player.Nom + " : \n"
-                        + "\n - Sante = " + _player.Sante
-                        + "\n - Chance = " + _player.Chance + " %"
-                        + "\n - Medikit = " + _player.NbMedikit
-                        + "\n - Argent = " + _player.Argent + " $");
+        AfficherInfoPlayer(Fenetre);
 
         // Affichage de l'illustration
         if (noeud.Illustration != null) {
@@ -177,6 +171,17 @@ public class Gameplay {
         panel.add(Box.createVerticalGlue());
 
         fenetre.add(panel, BorderLayout.CENTER);
+
+        App.ActualiserFenetre(fenetre);
+    }
+
+    private void AfficherInfoPlayer(JFrame fenetre) {
+        _zoneInfos.setText(
+                _player.Nom + " : \n"
+                        + "\n - Sante = " + _player.Sante
+                        + "\n - Chance = " + _player.Chance + " %"
+                        + "\n - Medikit = " + _player.NbMedikit
+                        + "\n - Argent = " + _player.Argent + " $");
 
         App.ActualiserFenetre(fenetre);
     }
