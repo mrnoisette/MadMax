@@ -16,4 +16,16 @@ public class Player {
         NoeudActuel = noeudActuel;
     }
 
+
+    public void SeSoigner(){
+        if (this.NbMedikit > 0 && this.Sante < 100){
+            this.Sante = 100;
+            this.NbMedikit -= 1;
+        }
+    }
+
+    public void TakeDamage(int damage){
+        this.Sante -= damage;
+    }
+
 }

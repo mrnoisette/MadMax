@@ -1,7 +1,5 @@
-import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
 import java.util.Random;
 
 public class Gameplay {
@@ -10,66 +8,88 @@ public class Gameplay {
     private JFrame Fenetre;
 
     // Illustration
-    private JLabel _imageLabel;
+    private JLabel _zoneImage;
 
     // Description
-    private JTextArea _zoneTexte;
+    private JTextArea _zoneDescription;
 
     // Infos sur le joueur
     private JTextArea _zoneInfos;
 
-    // Choix possibles
+    // Actions
     private JPanel _zoneBoutons;
 
-    // Audio
-    private Clip _musique;
-    private Clip _voix;
+    private JPanel _zoneChoix;
 
     // Joueur
-    private Player _player = DataGame.getInstance().CurrentPlayer;
+    private Player _player = DataGame.getInstance().Player;
 
     // Constructeur
     public Gameplay(JFrame fenetre) {
+
         App.ClearFenetre(fenetre);
         Fenetre = fenetre;
 
-        // Infos sur le joueur
-        _zoneInfos = new JTextArea();
+        Fenetre = fenetre;
+        Fenetre.setTitle("MadMax");
+        Fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Fenetre.setLayout(new BorderLayout());
+
+        // Bandeau latéral
+        JPanel bandeauLateral = new JPanel();
+        bandeauLateral.setLayout(new BoxLayout(bandeauLateral, BoxLayout.Y_AXIS));
+        bandeauLateral.setPreferredSize(new Dimension(200, 600));
+
+        // zoneInfos (enfant du bandeau latéral)
+        _zoneInfos = new JTextArea("");
         _zoneInfos.setEditable(false);
-        _zoneInfos.setBackground(Color.black);
-        _zoneInfos.setForeground(Color.white);
-        _zoneInfos.setFont(new Font("Arial", Font.PLAIN, 18));
-        Fenetre.add(_zoneInfos, BorderLayout.WEST);
+        _zoneInfos.setBackground(Color.BLACK);
+        _zoneInfos.setForeground(Color.WHITE);
+        _zoneInfos.setBorder(BorderFactory.createTitledBorder("Infos"));
+        bandeauLateral.add(_zoneInfos);
 
-        // Choix possibles
+        // zoneBoutons (enfant du bandeau latéral)
         _zoneBoutons = new JPanel();
-        Fenetre.add(_zoneBoutons, BorderLayout.SOUTH);
+        _zoneBoutons.setBorder(BorderFactory.createTitledBorder("Actions"));
+        _zoneBoutons.setLayout(new FlowLayout());
+        var boutonSoin = new JButton("Se soigner");
+        boutonSoin.addActionListener(e -> {
+            _player.SeSoigner();
+            AfficherInfoPlayer(fenetre);
+        });
+        _zoneBoutons.add(boutonSoin);
+        bandeauLateral.add(_zoneBoutons);
+        Fenetre.add(bandeauLateral, BorderLayout.WEST);
 
-        // Panel central pour l'illusatration et la description
-        var centerPanel = new JPanel(new BorderLayout());
-        centerPanel.setBackground(Color.black);
+        JPanel centrePanel = new JPanel(new BorderLayout());
 
-        // Illustration
-        _imageLabel = new JLabel();
-        _imageLabel.setHorizontalAlignment(JLabel.CENTER);
-        _imageLabel.setBackground(Color.black);
-        centerPanel.add(_imageLabel, BorderLayout.CENTER);
+        // zoneImage
+        _zoneImage = new JLabel("", SwingConstants.CENTER);
+        _zoneImage.setPreferredSize(new Dimension(400, 300));
+        _zoneImage.setBorder(BorderFactory.createTitledBorder(""));
+        centrePanel.add(_zoneImage, BorderLayout.CENTER);
 
-        // Description
-        _zoneTexte = new JTextArea();
-        _zoneTexte.setEditable(false);
-        _zoneTexte.setBackground(Color.black);
-        _zoneTexte.setForeground(Color.white);
-        _zoneTexte.setFont(new Font("Arial", Font.PLAIN, 18));
-        _zoneTexte.setLineWrap(true);
-        _zoneTexte.setWrapStyleWord(true);
-        _zoneTexte.setMargin(new Insets(10, 10, 100, 10));
-        centerPanel.add(_zoneTexte, BorderLayout.SOUTH);
+        // zoneDescription
+        _zoneDescription = new JTextArea("");
+        _zoneDescription.setEditable(false);
+        _zoneDescription.setBackground(Color.BLACK);
+        _zoneDescription.setForeground(Color.WHITE);
+        _zoneDescription.setLineWrap(true);
+        _zoneDescription.setWrapStyleWord(true);
+        _zoneDescription.setBorder(BorderFactory.createTitledBorder(""));
+        _zoneDescription.setPreferredSize(new Dimension(400, 100));
+        centrePanel.add(_zoneDescription, BorderLayout.SOUTH);
+        Fenetre.add(centrePanel, BorderLayout.CENTER);
 
-        Fenetre.add(centerPanel, BorderLayout.CENTER);
+        // zoneChoix
+        _zoneChoix = new JPanel();
+        _zoneChoix.setBorder(BorderFactory.createTitledBorder("Choix possibles"));
+        _zoneChoix.setLayout(new FlowLayout());
+        Fenetre.add(_zoneChoix, BorderLayout.SOUTH);
+
+        Fenetre.setSize(800, 600);
 
         Fenetre.setVisible(true);
-
     }
 
     // Affiche un noeud dans la fenetre
@@ -80,7 +100,7 @@ public class Gameplay {
         DataGame.getInstance().Sauvegarder(_player);
 
         // Infliger les dégats s'il y en a
-        _player.Sante -= noeud.Degat;
+        _player.TakeDamage(noeud.Degat);
 
         if (noeud.EstMortel || _player.Sante <= 0) { // Le joueur est mort
             AfficherEcranMort(Fenetre, noeud);
@@ -88,29 +108,24 @@ public class Gameplay {
 
         // Affichage du texte
         if (noeud.Description != null && !noeud.Description.isEmpty()) {
-            _zoneTexte.setText(noeud.Description);
+            _zoneDescription.setText(noeud.Description);
         }
 
         // Affichage des infos
-        _zoneInfos.setText(
-                _player.Nom + " : \n"
-                        + "\n - Sante = " + _player.Sante
-                        + "\n - Chance = " + _player.Chance + " %"
-                        + "\n - Medikit = " + _player.NbMedikit
-                        + "\n - Argent = " + _player.Argent + " $");
+        AfficherInfoPlayer(Fenetre);
 
         // Affichage de l'illustration
         if (noeud.Illustration != null) {
-            _imageLabel.setIcon(noeud.Illustration);
+            _zoneImage.setIcon(noeud.Illustration);
         } else {
-            _imageLabel.setIcon(null);
+            _zoneImage.setIcon(null);
         }
 
         // Lecture de l'audio
         noeud.JouerAudios();
 
         // Affichage des choix
-        _zoneBoutons.removeAll();
+        _zoneChoix.removeAll();
         if (noeud.ListeChoix != null && noeud.ListeChoix.size() > 0) {
             for (var choix : noeud.ListeChoix) {
                 var bouton = new JButton();
@@ -118,9 +133,9 @@ public class Gameplay {
                 bouton.addActionListener(e -> {
                     AfficherNoeud(choix.ProchainNoeud);
                 });
-                _zoneBoutons.add(bouton);
+                _zoneChoix.add(bouton);
             }
-        } 
+        }
 
         App.ActualiserFenetre(Fenetre);
     }
@@ -155,6 +170,17 @@ public class Gameplay {
         panel.add(Box.createVerticalGlue());
 
         fenetre.add(panel, BorderLayout.CENTER);
+
+        App.ActualiserFenetre(fenetre);
+    }
+
+    private void AfficherInfoPlayer(JFrame fenetre) {
+        _zoneInfos.setText(
+                _player.Nom + " : \n"
+                        + "\n - Sante = " + _player.Sante
+                        + "\n - Chance = " + _player.Chance + " %"
+                        + "\n - Medikit = " + _player.NbMedikit
+                        + "\n - Argent = " + _player.Argent + " $");
 
         App.ActualiserFenetre(fenetre);
     }

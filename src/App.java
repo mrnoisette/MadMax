@@ -74,7 +74,7 @@ public class App {
 
             panelProfils.add(CreerBtnMenu(player.Nom, e -> {
                 // Définir le joueur sélectionné
-                DataGame.getInstance().CurrentPlayer = player;
+                DataGame.getInstance().Player = player;
                 ClearFenetre(fenetre);
                 // Lancer le jeu
                 TransitionFenetre(fenetre, () -> {
