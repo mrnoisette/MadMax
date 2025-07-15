@@ -1,13 +1,13 @@
 <listeNoeud>
     <noeud id="1">
         <description>À la suite d'innombrables années d'ignorance, et malgré les alertes que notre
-            planète nous a envoyé, celle-ci ne pouvait plus encaisser le poids de nos actes. La
+            planète nous a envoyé, celleci ne pouvait plus encaisser le poids de nos actes. La
             sécheresse. Issues de l'épuisement de l'ensemble des ressources planétaires, emmena
             l'humanité dans des tréfonds irréversibles, et l'avènement d'une époque sinistre faisait
             surface... Désormais, le pétrole et l'eau, étaient les seules denrées qui avaient de la
             valeur dans ce monde intrépide, en proie à la désolation...</description>
-        <illustration>./assets/images/introduction.jpeg</illustration>
-        <narration>./assets/sounds/introduction.wav</narration>
+        <illustration>./assets/images/n1.jpeg</illustration>
+        <narration>./assets/sounds/voix1.wav</narration>
         <musique></musique>
         <listeChoix>
             <choix libelle="Continuer">2</choix>
@@ -22,8 +22,8 @@
             préparé une Dodge Interceptor. À son bord, un V8 compresseur GT Turbo 16 soupapes
             atmosphérique décranté. Avec ça, vous
             n'aurez aucun obstacle...</description>
-        <illustration>./assets/images/interceptor.jpeg</illustration>
-        <narration>./assets/sounds/commencement.wav</narration>
+        <illustration>./assets/images/n2.jpeg</illustration>
+        <narration>./assets/sounds/voix2.wav</narration>
         <musique>./assets/sounds/motor.wav</musique>
         <listeChoix>
             <choix libelle="Continuer">3</choix>
@@ -39,26 +39,634 @@
             ouvrez le capot, et vous êtes pris d'une toux éttoufante avec toute cette fumée qui sort
             du moteur. Votre véhicule à surchauffer, et le liquide de refroidissement s'est
             évaporée. Vous devez en retrouver pour continuer. Vous appercevez néanmoins une
-            silhouette au loins. Il s'agit d'un camion qui approche. Que faites-vous ?</description>
-        <illustration>./assets/images/panneAutoroute.png</illustration>
-        <narration></narration>
+            silhouette au loins. Il s'agit d'un camion qui approche. Que faites vous ?</description>
+        <illustration>./assets/images/n3.jpeg</illustration>
+        <narration>./assets/sounds/voix3.wav</narration>
         <musique></musique>
         <listeChoix>
             <choix libelle="Faire du stop">4</choix>
-            <choix libelle="Se cacher">5</choix>
+            <choix libelle="Se cacher">6</choix>
         </listeChoix>
         <estMortel>false</estMortel>
         <degat></degat>
     </noeud>
     <noeud id="4">
-        <description>Le véhicule approchant peu à peu, vous dicerner une bande de bandit.
-            Vous auriez dû vous cacher...</description>
-        <illustration></illustration>
-        <narration>./assets/sounds/introduction.wav</narration>
-        <musique>./assets/sounds/death.wav</musique>
+        <description>Le véhicule approchant peu à peu, vous discernez une bande de bandits. Ils vous
+            encerclent, l'air menaçant. Un des brutes s'approche, le visage marqué par le soleil et
+            la violence. "Tiens, un petit nouveau. Tu as l'air perdu, camarade. Qu'estce que tu as
+            de précieux sur toi ?"</description>
+        <illustration>./assets/images/n4.jpeg</illustration>
+        <narration>./assets/sounds/voix4.wav</narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Tenter de les raisonner">7</choix>
+            <choix libelle="Attaquer">8</choix>
+            <choix libelle="Prendre la fuite à pied">9</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="5">
+        <description>Le véhicule approchant peu à peu, vous discernez une bande de bandits. Vous
+            auriez dû vous cacher...</description>
+        <illustration>./assets/images/n5.jpeg</illustration>
+        <narration>./assets/sounds/voix5.wav</narration>
+        <musique></musique>
         <listeChoix>
         </listeChoix>
         <estMortel>true</estMortel>
         <degat></degat>
+    </noeud>
+
+    <noeud id="6">
+        <description>Vous vous précipitez derrière un amas de rochers, vous fondant dans le décor
+            aride. Le camion passe en trombe, un convoi de pillards armés à son bord. Vous les
+            entendez rire et vociférer. Vous avez échappé à un danger certain, mais votre
+            Interceptor est toujours à l'arrêt, et le soleil continue de taper.</description>
+        <illustration>./assets/images/n6.jpeg</illustration>
+        <narration>./assets/sounds/voix6.wav</narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Partir à pied chercher de l'eau">10</choix>
+            <choix libelle="Attendre un autre véhicule">11</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="7">
+        <description>Vous tentez de négocier avec les bandits, expliquant votre mission et
+            l'importance de l'eau pour votre colonie. Le chef des bandits, un colosse au crâne rasé,
+            vous toise avec mépris. "L'eau, c'est pour ceux qui la prennent. Et toi, tu n'as rien
+            pris du tout, juste des belles paroles."</description>
+        <illustration>./assets/images/n7.jpeg</illustration>
+        <narration>./assets/sounds/voix7.wav</narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Tenter de vous défendre">8</choix>
+            <choix libelle="Proposer vos dernières rations d'eau">12</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="8">
+        <description>Vous décidez d'affronter les bandits. Le combat est brutal. Vous réussissez à
+            en neutraliser un, mais les autres vous submergent rapidement. La douleur vous envahit
+            alors que vous sombrez dans l'inconscience. Votre mission s'achève ici.</description>
+        <illustration>./assets/images/n8.jpeg</illustration>
+        <narration>./assets/sounds/voix8.wav</narration>
+        <musique></musique>
+        <listeChoix></listeChoix>
+        <estMortel>true</estMortel>
+        <degat>100</degat>
+    </noeud>
+    <noeud id="9">
+        <description>Vous prenez vos jambes à votre cou, laissant l'Interceptor derrière vous. Les
+            bandits hurlent des injures dans votre dos, mais vous êtes plus rapide qu'eux sur ce
+            terrain accidenté. Vous vous éloignez, mais la solitude et le manque d'eau commencent à
+            peser lourdement. Votre santé est affaiblie par l'effort.</description>
+        <illustration>./assets/images/n9.jpeg</illustration>
+        <narration>./assets/sounds/voix9.wav</narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Continuer vers l'horizon">13</choix>
+            <choix libelle="Chercher un abri">14</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>20</degat>
+    </noeud>
+    <noeud id="10">
+        <description>Vous prenez le risque de laisser votre Interceptor et partez à pied. Le soleil
+            tape fort, et la chaleur est écrasante. Après une heure de marche, vous apercevez au
+            loin une carcasse de bus rouillé, entourée de quelques cactus. Cela pourrait être un
+            abri, ou un piège...</description>
+        <illustration>./assets/images/n10.jpeg</illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Explorer le bus">15</choix>
+            <choix libelle="Contourner le bus et continuer">16</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>10</degat>
+    </noeud>
+    <noeud id="11">
+        <description>Vous vous cachez et attendez. Les heures passent, lentes et lourdes. La soif
+            commence à vous tenaille. Enfin, une nouvelle silhouette apparaît à l'horizon. C'est un
+            petit convoi de marchands, l'air moins menaçant que les précédents bandits. Ils semblent
+            transportés des bidons d'eau.</description>
+        <illustration>./assets/images/n11.jpeg</illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Aborder les marchands">17</choix>
+            <choix libelle="Tenter de les suivre discrètement">18</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>5</degat>
+    </noeud>
+    <noeud id="12">
+        <description>Désespéré, vous offrez vos dernières rations d'eau aux bandits. Le chef les
+            prends, les examine, puis ricane. "Pas mal pour un débutant. Mais ce n'est pas assez
+            pour acheter ta vie." Il vous assène un coup violent, vous laissant pour mort dans la
+            poussière. Votre sacrifice est vain.</description>
+        <illustration>./assets/images/n12.jpeg</illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix></listeChoix>
+        <estMortel>true</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="13">
+        <description>Vous continuez votre route à pied, sous un soleil de plomb. La chaleur vous
+            accable, et la soif vous ronge. Après des heures de marche, vous apercevez un mirage,
+            puis une oasis... ou estce un piège ? Vos forces vous lâchent, vous vous évanouissez.
+            C'est la fin du voyage.</description>
+        <illustration>./assets/images/n13.jpeg</illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix></listeChoix>
+        <estMortel>true</estMortel>
+        <degat>100</degat>
+    </noeud>
+    <noeud id="14">
+        <description>Vous trouvez une petite crevasse dans le roc, à l'ombre. Vous vous y réfugiez
+            pour reprendre des forces. Le silence du désert est assourdissant. Vous vous endormez,
+            mais des bruits étranges vous réveillent en sursaut. Des créatures nocturnes rôdent.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Rester caché">19</choix>
+            <choix libelle="Tenter de les effrayer">20</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="15">
+        <description>Vous entrez prudemment dans le bus. L'intérieur est délabré, mais vous trouvez
+            une petite gourde à moitié pleine d'un liquide trouble. Il y a aussi des traces de vie
+            récentes, et une carte rudimentaire du désert épinglée au mur, indiquant un point d'eau
+            à proximité.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Boire le liquide (risque)">21</choix>
+            <choix libelle="Suivre la carte vers le point d'eau">22</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="16">
+        <description>Vous contournez le bus, préférant éviter tout risque. La marche continue,
+            pénible. La soif et la fatigue vous épuisent. Vous comprenez que vous ne pourrez pas
+            continuer longtemps sans eau. Vous perdez des forces précieuses.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Rebrousser chemin vers le bus">15</choix>
+            <choix libelle="Tenter de trouver un autre abri">23</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>15</degat>
+    </noeud>
+    <noeud id="17">
+        <description>Vous sortez de votre cachette et hélé les marchands. Ils s'arrêtent, l'air
+            méfiant. L'un d'eux, un vieil homme avec une barbe grise, vous demande ce que vous
+            voulez. Vous expliquez votre situation et proposez d'échanger des biens. Ils sont prêts
+            à vous aider, mais à leur prix.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Échanger de l'essence contre de l'eau">24</choix>
+            <choix libelle="Tenter de leur voler l'eau (risque)">25</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="18">
+        <description>Vous décidez de suivre les marchands à distance. Ils se dirigent vers un petit
+            campement isolé. Vous apprenez qu'ils se rendent à un marché noir secret où l'eau est
+            échangée contre toutes sortes de marchandises. C'est une opportunité unique.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Infiltrer le marché noir">26</choix>
+            <choix libelle="Attendre qu'ils repartent et fouiller leur camp">27</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="19">
+        <description>Vous restez immobile, le souffle coupé, tandis que les créatures rôdent. Leurs
+            grognements se rapprochent, puis s'éloignent. Le lever du soleil vous trouve épuisé mais
+            sauf. Vous avez réussi à survivre à la nuit du désert.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Reprendre la route">28</choix>
+            <choix libelle="Chercher des ressources locales">29</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>5</degat>
+    </noeud>
+    <noeud id="20">
+        <description>Vous jetez une pierre dans leur direction, tentant de les effrayer. Les
+            créatures réagissent par des cris perçants et se ruent sur vous. Elles sont plus
+            nombreuses et plus agressives que prévu. Vous êtes rapidement submergé par la meute. Le
+            désert est sans pitié.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix></listeChoix>
+        <estMortel>true</estMortel>
+        <degat>100</degat>
+    </noeud>
+    <noeud id="21">
+        <description>Vous buvez le liquide de la gourde. Au début, rien. Puis, une forte nausée vous
+            prend. Le liquide était contaminé, mais pas mortel. Vous vous sentez mal pendant un
+            moment, mais votre soif est apaisée. Vous récupérez un peu de vie mais perdez du temps.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Suivre la carte vers le point d'eau">22</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>5</degat>
+    </noeud>
+    <noeud id="22">
+        <description>Vous suivez la carte, traversant des dunes et des rochers. La chaleur est
+            intense, mais l'espoir vous pousse en avant. Après un long trajet, vous arrivez à une
+            petite source souterraine, abritée par une crevasse. L'eau est pure et fraîche ! Vous
+            faites le plein de votre gourde et remplissez un jerrican de secours.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Retourner à l'Interceptor">30</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="23">
+        <description>Vous continuez d'avancer, épuisé. Le désert est implacable. Sans eau ni abri,
+            vos forces vous abandonnent définitivement. Votre corps s'effondre sur le sable chaud,
+            et vous succombez à la déshydratation. Le désert a eu le dernier mot.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix></listeChoix>
+        <estMortel>true</estMortel>
+        <degat>100</degat>
+    </noeud>
+    <noeud id="24">            
+        <description>Vous échangez une partie de votre réserve d'essence contre deux bidons d'eau.
+            C'est cher payé, mais c'est vital. Vous avez de quoi redémarrer l'Interceptor et
+            continuer votre mission. Les marchands vous donnent des indications sur le chemin à
+            prendre pour éviter les zones les plus dangereuses.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Retourner à l'Interceptor">30</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="25">
+        <description>Vous tentez de voler les bidons d'eau des marchands. Ils sont plus vigilants
+            que vous ne l'auriez cru. En un instant, vous êtes maîtrisé et désarmé. Ils n'ont aucune
+            pitié pour les voleurs. Votre audace vous coûte la vie.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix></listeChoix>
+        <estMortel>true</estMortel>
+        <degat>100</degat>
+    </noeud>
+    <noeud id="26">
+        <description>Vous vous infiltrez discrètement dans le marché noir. L'endroit est grouillant
+            de monde, de bruits et d'odeurs étranges. Vous y trouvez une grande variété de biens,
+            dont des jerricans de liquide de refroidissement et des bidons d'eau. Les prix sont
+            exorbitants, mais vous pouvez y échanger des objets que vous avez sur vous.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Échanger des munitions contre de l'eau et du liquide">31</choix>
+            <choix libelle="Tenter de voler de l'eau (risque élevé)">32</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="27">
+        <description>Vous attendez que les marchands quittent leur campement. Une fois seul, vous
+            fouillez les tentes. Vous trouvez quelques rations de survie et un petit bidon d'huile
+            moteur, mais pas de liquide de refroidissement ni suffisamment d'eau pour votre
+            Interceptor. Vous avez perdu du temps et êtes toujours bloqué.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Retourner à l'Interceptor et attendre">11</choix>
+            <choix libelle="Tenter de retrouver les marchands">17</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>5</degat>
+    </noeud>
+    <noeud id="28">
+        <description>Après une nuit éprouvante, vous reprenez la route à pied, sous le soleil
+            levant. Vous êtes toujours loin de votre véhicule, et la faim et la soif commencent à
+            vous affaiblir. Vous avez besoin d'un plan d'urgence.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Continuer à marcher vers l'horizon">13</choix>
+            <choix libelle="Chercher des signes de civilisation">29</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>10</degat>
+    </noeud>
+    <noeud id="29">
+        <description>Vous décidez de chercher des signes de vie. Après une longue marche, vous
+            apercevez de la fumée à l'horizon. C'est peutêtre un campement, ou une autre bande de
+            pillards. L'espoir et le danger se mêlent. Votre santé est faible.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Approcher prudemment la fumée">33</choix>
+            <choix libelle="Tenter de faire un détour">34</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>15</degat>
+    </noeud>
+    <noeud id="30">
+        <description>Vous retournez vers l'Interceptor, le jerrican d'eau en main. La joie vous
+            submerge. Vous remplissez le réservoir de votre véhicule, démarrez le moteur avec
+            succès. L'Interceptor rugit, prêt à reprendre la route. Vous avez surmonté cette
+            première épreuve.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Continuer vers San Pedro">35</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="31">
+        <description>Vous échangez quelques munitions précieuses contre un jerrican d'eau et une
+            bouteille de liquide de refroidissement. Les marchands sont satisfaits de l'échange.
+            Vous avez maintenant tout ce qu'il faut pour redémarrer l'Interceptor et continuer votre
+            mission. Vous avez réussi à naviguer dans ce marché dangereux.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Retourner à l'Interceptor">30</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="32">
+        <description>Vous tentez de voler de l'eau au marché noir. L'un des gardes vous repère et
+            donne l'alerte. Le marché se transforme en chaos. Vous êtes pourchassé et rapidement
+            acculé par une foule en colère. Votre tentative audacieuse se termine par une mort
+            violente.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix></listeChoix>
+        <estMortel>true</estMortel>
+        <degat>100</degat>
+    </noeud>
+    <noeud id="33">
+        <description>Vous avancez prudemment vers la fumée. En approchant, vous découvrez un petit
+            campement de nomades. Ils ne sont pas hostiles, mais méfiants. Ils acceptent de vous
+            aider en échange de services. Ils ont de l'eau et des pièces pour votre Interceptor.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Proposer votre aide en échange de ressources">36</choix>
+            <choix libelle="Tenter de les voler (risque élevé)">37</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="34">
+        <description>Vous décidez de faire un grand détour pour éviter la fumée. Cela vous coûte un
+            temps précieux et vous épuise encore plus. La soif vous ronge, et vos pas sont de plus
+            en plus lourds. Vous avez évité un danger potentiel, mais vous vous enfoncez davantage
+            dans le désert hostile.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Continuer à marcher, malgré la fatigue">13</choix>
+            <choix libelle="Tenter de trouver un abri temporaire">14</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>20</degat>
+    </noeud>
+    <noeud id="35">
+        <description>L'Interceptor vrombit sous vous, la route défile à nouveau. Vous reprenez votre
+            mission, la citerne de San Pedro vous attend. Le désert est toujours là, impitoyable,
+            mais vous êtes prêt à affronter les prochains défis. Votre voyage ne fait que commencer.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Continuer l'aventure">38</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="36">
+        <description>Vous proposez vos services aux nomades. Ils ont besoin d'aide pour réparer une
+            de leurs caravanes. En échange, ils vous offrent de l'eau et vous donnent un bidon de
+            liquide de refroidissement. Vous avez gagné leur confiance et des ressources précieuses.
+            Votre santé s'améliore.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Retourner à l'Interceptor">30</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>10</degat>
+    </noeud>
+    <noeud id="37">
+        <description>Vous tentez de voler les nomades. Ils sont peutêtre pacifiques, mais ils sont
+            aussi bien organisés. Vous êtes rapidement maîtrisé par le groupe. Ils ne vous tuent
+            pas, mais vous dépouillent de tout ce que vous possédez et vous laissent seul au milieu
+            du désert, sans espoir.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix></listeChoix>
+        <estMortel>true</estMortel>
+        <degat>100</degat>
+    </noeud>
+    <noeud id="38">
+        <description>La route vers San Pedro est longue et semée d'embûches. Vous rencontrez des
+            mirages, des tempêtes de sable et d'autres véhicules hostiles. Chaque kilomètre est un
+            défi, mais vous êtes déterminé à ramener l'eau à votre colonie. De nouvelles aventures
+            vous attendent.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Avancer encore">39</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="39">
+        <description>Un silence oppressant tombe sur le désert. Le vent charrie des murmures
+            lointains. Un pressentiment vous étreint alors qu'une ombre immense se dessine à
+            l'horizon, grandissant à chaque instant. C'est un convoi gigantesque, lourdement armé,
+            se dirigeant droit sur vous. Ils ne semblent pas avoir l'intention de ralentir.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Tenter de les éviter par un virage serré">40</choix>
+            <choix libelle="Préparer votre arme et les affronter de front">41</choix>
+            <choix libelle="Utiliser le nitro pour les semer">42</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="40">
+        <description>Vous donnez un coup de volant sec, le pneu crisse sur le sable. L'Interceptor
+            dérape dangereusement, soulevant un nuage de poussière. Vous manquez de peu de percuter
+            l'un des véhicules du convoi. Votre manœuvre est réussie, mais votre véhicule est
+            endommagé, et vous avez perdu des points de vie dans le choc.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Vérifier les dégâts">43</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>15</degat>
+    </noeud>
+    <noeud id="41">
+        <description>Vous décidez d'affronter le convoi. Vous préparez votre arme, le cœur battant.
+            Les véhicules foncent sur vous, et le combat éclate. Vous tirez, évitez les tirs
+            ennemis, mais vous êtes seul contre plusieurs. La lutte est inégale. Le dernier bruit
+            que vous entendez est le fracas de votre Interceptor avant que tout ne devienne noir.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix></listeChoix>
+        <estMortel>true</estMortel>
+        <degat>100</degat>
+    </noeud>
+    <noeud id="42">
+        <description>Vous enclenchez le nitro. L'Interceptor bondit en avant, laissant le convoi
+            loin derrière dans un nuage de sable. Vous avez réussi à semer vos poursuivants, mais
+            l'utilisation excessive du nitro a mis à rude épreuve votre moteur. Il fume, et vous
+            savez que vous ne pourrez plus l'utiliser pendant un moment.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Continuer la route prudemment">44</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>5</degat>
+    </noeud>
+    <noeud id="43">
+        <description>Vous arrêtez l'Interceptor pour évaluer les dégâts. Le parechocs est arraché,
+            et le moteur émet un bruit suspect. Vous avez besoin de réparations avant de pouvoir
+            continuer en toute sécurité. Heureusement, vous apercevez une épave de stationservice
+            abandonnée au loin.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Explorer la stationservice">45</choix>
+            <choix libelle="Tenter de réparer avec ce que vous avez">46</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="44">
+        <description>Vous continuez votre route, le cœur encore battant de l'échappée belle. La
+            prudence est de mise. Le soleil se couche, peignant le désert de couleurs flamboyantes.
+            Vous cherchez un endroit sûr pour passer la nuit.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Trouver une grotte ou une crevasse">47</choix>
+            <choix libelle="Bivouaquer en plein air">48</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat></degat>
+    </noeud>
+    <noeud id="45">
+        <description>Vous explorez la vieille stationservice. L'endroit est lugubre, mais vous
+            trouvez quelques outils rouillés et un bidon d'huile moteur. Plus important encore, sous
+            une pile de pneus, vous découvrez un jerrican de carburant presque plein et une petite
+            trousse de premiers secours. Vous réparez sommairement l'Interceptor et soignez vos
+            blessures.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Reprendre la route">35</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>10</degat>
+    </noeud>
+    <noeud id="46">
+        <description>Vous tentez de réparer l'Interceptor avec les outils de fortune que vous avez.
+            C'est difficile, et vous ne parvenez qu'à des réparations sommaires. Le véhicule reste
+            fragile, et le risque de panne est élevé. Vous avez perdu du temps et de l'énergie pour
+            un résultat médiocre.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Reprendre la route en priant">35</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>5</degat>
+    </noeud>
+    <noeud id="47">
+        <description>Vous trouvez une petite grotte, à l'abri du vent et des regards indiscrets.
+            Vous y passez une nuit relativement calme, en sécurité. Le repos vous fait du bien, et
+            vous êtes prêt à reprendre la route au lever du soleil.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Reprendre la route au matin">35</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>5</degat>
+    </noeud>
+    <noeud id="48">
+        <description>Vous décidez de bivouaquer en plein air. Le désert est froid la nuit, et les
+            bruits lointains vous tiennent en alerte. Vous ne dormez que d'un œil, épuisé par le
+            manque de repos. Au matin, vous vous sentez affaibli et vulnérable.</description>
+        <illustration></illustration>
+        <narration></narration>
+        <musique></musique>
+        <listeChoix>
+            <choix libelle="Reprendre la route épuisé">35</choix>
+        </listeChoix>
+        <estMortel>false</estMortel>
+        <degat>10</degat>
     </noeud>
 </listeNoeud>
